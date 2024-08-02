@@ -1,0 +1,15 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Player {
+  sofifa_id  Int    @id
+  player_url String @unique
+  short_name String
+  long_name  String
+}
