@@ -16,6 +16,9 @@ const cardsFiltersSchema = z.object({
   year: z.string(),
   minOverall: z.coerce.string(),
   maxOverall: z.coerce.string(),
+  minPotential: z.coerce.string(),
+  maxPotential: z.coerce.string(),
+  foot: z.string(),
   country: z.string(),
 })
 export type CardsFiltersSchema = z.infer<typeof cardsFiltersSchema>
@@ -29,6 +32,9 @@ export function CardFilter() {
       year: 'any',
       minOverall: '',
       maxOverall: '',
+      minPotential: '',
+      maxPotential: '',
+      foot: 'any',
       country: 'any',
     },
   })
@@ -70,6 +76,46 @@ export function CardFilter() {
         state.set('maxOverall', data.maxOverall)
       } else {
         state.delete('maxOverall')
+      }
+
+      return state
+    })
+
+    setSearchParams((state) => {
+      if (data.minPotential) {
+        state.set('minPotential', data.minPotential)
+      } else {
+        state.delete('minPotential')
+      }
+
+      return state
+    })
+
+    setSearchParams((state) => {
+      if (data.foot) {
+        state.set('foot', data.foot)
+      } else {
+        state.delete('foot')
+      }
+
+      return state
+    })
+
+    setSearchParams((state) => {
+      if (data.maxPotential) {
+        state.set('maxPotential', data.maxPotential)
+      } else {
+        state.delete('maxPotential')
+      }
+
+      return state
+    })
+
+    setSearchParams((state) => {
+      if (data.country) {
+        state.set('country', data.country)
+      } else {
+        state.delete('country')
       }
 
       return state

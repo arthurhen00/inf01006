@@ -14,28 +14,22 @@ export function App() {
         <div className="flex flex-wrap justify-center gap-4">
           <Card />
           <Card />
-          <div className="h-56 w-44 bg-black">1</div>
-          <div className="h-56 w-44 bg-black">1</div>
-          <div className="h-56 w-44 bg-black">1</div>
-          <div className="h-56 w-44 bg-black">1</div>
-          <div className="h-56 w-44 bg-black">1</div>
-          <div className="h-56 w-44 bg-black">1</div>
-          <div className="h-56 w-44 bg-black">1</div>
-          <div className="h-56 w-44 bg-black">1</div>
-          <div className="h-56 w-44 bg-black">1</div>
-          <div className="h-56 w-44 bg-black">1</div>
-          <div className="h-56 w-44 bg-black">1</div>
-          <div className="h-56 w-44 bg-black">1</div>
-          <div className="h-56 w-44 bg-black">1</div>
-          <div className="h-56 w-44 bg-black">1</div>
-          <div className="h-56 w-44 bg-black">1</div>
-          <div className="h-56 w-44 bg-black">1</div>
-          <div className="h-56 w-44 bg-black">1</div>
-          <div className="h-56 w-44 bg-black">1</div>
-          <div className="h-56 w-44 bg-black">1</div>
-          <div className="h-56 w-44 bg-black">1</div>
-          <div className="h-56 w-44 bg-black">1</div>
-          <div className="h-56 w-44 bg-black">1</div>
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
+          <Card />
         </div>
       </ScrollArea>
     </main>
