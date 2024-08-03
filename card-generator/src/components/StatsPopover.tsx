@@ -14,7 +14,7 @@ export function StatsPopover() {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="default" className="bg-fst-800 border-snd-200 text-snd-100 border-[1px]">
+        <Button variant="default" className="bg-fst-800 border-snd-300 text-snd-100 border-[1px]">
           <Plus className="mr-2 h-3 w-3" />
           Stats filters
         </Button>

@@ -78,7 +78,7 @@ export function CardFilter() {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(handleFilterCards)} className="flex w-80 flex-col gap-y-2">
+      <form onSubmit={methods.handleSubmit(handleFilterCards)} className="flex w-80 flex-col gap-y-2 px-4">
         <h1 className="text-center text-2xl font-bold">Search for a specific player card</h1>
         <div className="flex flex-col gap-y-1">
           <Input
@@ -100,8 +100,8 @@ export function CardFilter() {
           <Label>Player nation</Label>
           <CountrySelect control={methods.control} />
         </div>
-        <Separator className="bg-stone-700" />
-        <Button className="text-snd-100 self-end">
+        <Separator className="bg-fst-200" />
+        <Button className="text-snd-100 border-snd-300 bg-fst-800 self-end border-[1px]">
           Procurar
           <Search className="ml-2 h-4 w-4" />
         </Button>

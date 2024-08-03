@@ -8,7 +8,7 @@ export function App() {
     <main className="bg-fst-900 text-snd-100 flex h-screen flex-row px-12 py-6">
       <CardFilter />
 
-      <Separator orientation="vertical" className="bg-fst-100" />
+      <Separator orientation="vertical" className="bg-fst-200" />
 
       <ScrollArea className="mx-auto w-screen">
         <div className="flex flex-wrap justify-center gap-4">

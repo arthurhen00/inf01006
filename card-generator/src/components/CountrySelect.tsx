@@ -2,11 +2,11 @@ import { Control, Controller } from 'react-hook-form'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from './ui/select'
 import { CardsFiltersSchema } from './CardFilter'
 
-interface YearSelectProps {
+interface CountrySelectProps {
   control: Control<CardsFiltersSchema>
 }
 
-export function CountrySelect({ control }: YearSelectProps) {
+export function CountrySelect({ control }: CountrySelectProps) {
   return (
     <Controller
       name="country"
