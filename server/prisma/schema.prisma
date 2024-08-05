@@ -8,8 +8,128 @@ datasource db {
 }
 
 model Player {
-  sofifa_id  Int    @id
-  player_url String @unique
-  short_name String
-  long_name  String
+  sofifa_id    Int            @id
+  player_url   String         @unique
+  short_name   String
+  long_name    String
+  PlayerNation PlayerNation[]
+}
+
+model PlayerStats {
+  sofifa_id       Int
+  year            Int
+  PlayerPositions PlayerPositions[]
+  PlayerTags      PlayerTags[]
+  PlayerTraits    PlayerTraits[]
+
+  @@id([sofifa_id, year])
+}
+
+model Nation {
+  nationality_id   Int          @id
+  nationality_name String
+  nation_flag_url  String
+  NationTeam       NationTeam[]
+  Club             Club[]
+}
+
+model NationTeam {
+  nation_team_id  Int    @id
+  nation_logo_url String
+
+  nationality_id Int
+  Nation         Nation         @relation(fields: [nationality_id], references: [nationality_id])
+  PlayerNation   PlayerNation[]
+}
+
+model PlayerNation {
+  nation_position      Int
+  nation_jersey_number Int
+
+  sofifa_id      Int
+  nation_team_id Int
+  Player         Player     @relation(fields: [sofifa_id], references: [sofifa_id])
+  NationTeam     NationTeam @relation(fields: [nation_team_id], references: [nation_team_id])
+
+  @@id([sofifa_id])
+}
+
+model Position {
+  position_id     Int               @id
+  position_name   String
+  PlayerPositions PlayerPositions[]
+}
+
+model PlayerPositions {
+  sofifa_id   Int
+  year        Int
+  position_id Int
+  Position    Position    @relation(fields: [position_id], references: [position_id])
+  PlayerStats PlayerStats @relation(fields: [sofifa_id, year], references: [sofifa_id, year])
+
+  @@id([sofifa_id, year, position_id])
+}
+
+model League {
+  league_id    Int    @id
+  league_name  String
+  league_level Int
+  Club         Club[]
+}
+
+model Club {
+  club_team_id  Int    @id
+  club_name     String
+  club_logo_url String
+
+  league_id      Int
+  nationality_id Int
+  League         League       @relation(fields: [league_id], references: [league_id])
+  Nation         Nation       @relation(fields: [nationality_id], references: [nationality_id])
+  PlayerClub     PlayerClub[]
+}
+
+model PlayerClub {
+  sofifa_id    Int
+  year         Int
+  club_team_id Int
+
+  club_position             String
+  club_jersey_number        Int
+  club_joined               DateTime @default(now())
+  club_contract_valid_until DateTime @default(now())
+
+  Club Club @relation(fields: [club_team_id], references: [club_team_id])
+
+  @@id([sofifa_id, year, club_team_id])
+}
+
+model Trait {
+  trait_id   Int    @id
+  trait_name String
+}
+
+model PlayerTraits {
+  sofifa_id Int
+  year      Int
+  trait_id  Int
+
+  PlayerStats PlayerStats @relation(fields: [sofifa_id, year], references: [sofifa_id, year])
+
+  @@id([sofifa_id, year, trait_id])
+}
+
+model Tag {
+  tag_id   Int    @id
+  tag_name String
+}
+
+model PlayerTags {
+  sofifa_id Int
+  year      Int
+  tag_id    Int
+
+  PlayerStats PlayerStats @relation(fields: [sofifa_id, year], references: [sofifa_id, year])
+
+  @@id([sofifa_id, year, tag_id])
 }

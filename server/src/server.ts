@@ -1,6 +1,9 @@
 import fastify from 'fastify'
+import { playersRoutes } from './routes/players'
 
 const app = fastify()
+
+app.register(playersRoutes)
 
 app.get('/test', () => {
   return 'ok'
