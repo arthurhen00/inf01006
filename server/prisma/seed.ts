@@ -19,23 +19,6 @@ async function seed() {
   await prisma.nationTeam.deleteMany({})
   await prisma.nation.deleteMany({})
 
-  await prisma.player.createMany({
-    data: [
-      {
-        sofifa_id: 0,
-        player_url: 'inf.ufrgs.br/~ahsilva',
-        long_name: 'Arthur Hendges da Silva',
-        short_name: 'Arthur H. Silva',
-      },
-      {
-        sofifa_id: 1,
-        player_url: 'inf.ufrgs.br/~gapereira',
-        long_name: 'Gabriel Pereira',
-        short_name: 'Gabriel P.',
-      },
-    ],
-  })
-
   await prisma.nation.createMany({
     data: [
       {
@@ -47,6 +30,32 @@ async function seed() {
         nationality_id: 1,
         nationality_name: 'Argentina',
         nation_flag_url: 'arg_nation_flag_url',
+      },
+    ],
+  })
+
+  await prisma.player.createMany({
+    data: [
+      {
+        sofifa_id: 0,
+        player_url: 'inf.ufrgs.br/~ahsilva',
+        long_name: 'Arthur Hendges da Silva',
+        short_name: 'Arthur H. Silva',
+        nationality_id: 0,
+      },
+      {
+        sofifa_id: 1,
+        player_url: 'inf.ufrgs.br/~gapereira',
+        long_name: 'Gabriel Pereira',
+        short_name: 'Gabriel P.',
+        nationality_id: 0,
+      },
+      {
+        sofifa_id: 2,
+        player_url: 'inf.ufrgs.br/~teste',
+        long_name: 'Teste',
+        short_name: 'T.',
+        nationality_id: 1,
       },
     ],
   })
@@ -123,6 +132,7 @@ async function seed() {
       { year: 2015, sofifa_id: 0 },
       { year: 2015, sofifa_id: 1 },
       { year: 2016, sofifa_id: 1 },
+      { year: 2015, sofifa_id: 2 },
     ],
   })
 
@@ -144,6 +154,7 @@ async function seed() {
         club_name: 'Gremio',
         league_id: 0,
         club_logo_url: 'logo_gremio_url',
+        club_flag_url: 'flag_gremio_url',
       },
       {
         club_team_id: 1,
@@ -151,6 +162,7 @@ async function seed() {
         club_name: 'internacional',
         league_id: 0,
         club_logo_url: 'logo_inter_url',
+        club_flag_url: 'flag_inter_url',
       },
     ],
   })
