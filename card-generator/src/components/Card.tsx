@@ -2,7 +2,7 @@ import { Separator } from './ui/separator'
 
 export function Card() {
   return (
-    <div className="m-2 flex h-56 w-44 items-center justify-center bg-yellow-600">
+    <div className="flex h-56 w-44 items-center justify-center bg-yellow-600">
       <div className="flex h-52 w-40 flex-col rounded-3xl bg-zinc-700">
         <div className="flex pl-2 pt-2">
           <div className="flex flex-col items-center font-bold text-white">
