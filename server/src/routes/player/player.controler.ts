@@ -1,13 +1,14 @@
-import { Controller, Get, Param } from '@nestjs/common'
-import { GetPlayerUseCase, GetPlayersUseCase } from './use-cases'
-import { GetPlayerRequest } from './requests'
-import { GetPlayerResponse } from './responses'
+import { Body, Controller, Get, Param, Post } from '@nestjs/common'
+import { GetPlayerUseCase, GetPlayersUseCase, GetFilteredPlayersUseCase } from './use-cases'
+import { GetFilteredPlayersRequest, GetPlayerRequest } from './requests'
+import { GetFilteredPlayersResponse, GetPlayerResponse } from './responses'
 
 @Controller()
 export class PlayerController {
   constructor(
     private readonly getPlayerUseCase: GetPlayerUseCase,
     private readonly getPlayersUseCase: GetPlayersUseCase,
+    private readonly getFilteredPlayersUseCase: GetFilteredPlayersUseCase,
   ) {}
 
   @Get('player/:id')
@@ -20,5 +21,11 @@ export class PlayerController {
   async getPlayers() {
     const players = await this.getPlayersUseCase.exec()
     return players
+  }
+
+  @Post('players/filtered')
+  async getFilteredPlayers(@Body() getFilteredPlayersRequest: GetFilteredPlayersRequest) {
+    const players = await this.getFilteredPlayersUseCase.exec(getFilteredPlayersRequest)
+    return GetFilteredPlayersResponse.fromArray(players)
   }
 }

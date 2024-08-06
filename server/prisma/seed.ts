@@ -77,21 +77,21 @@ async function seed() {
 
   await prisma.trait.createMany({
     data: [
-      { trait_id: 1, trait_name: 'Speed' },
-      { trait_id: 2, trait_name: 'Strength' },
-      { trait_id: 3, trait_name: 'Agility' },
-      { trait_id: 4, trait_name: 'Accuracy' },
-      { trait_id: 5, trait_name: 'Endurance' },
+      { trait_id: 0, trait_name: 'Speed' },
+      { trait_id: 1, trait_name: 'Strength' },
+      { trait_id: 2, trait_name: 'Agility' },
+      { trait_id: 3, trait_name: 'Accuracy' },
+      { trait_id: 4, trait_name: 'Endurance' },
     ],
   })
 
   await prisma.tag.createMany({
     data: [
-      { tag_id: 1, tag_name: 'Defender' },
-      { tag_id: 2, tag_name: 'Midfielder' },
-      { tag_id: 3, tag_name: 'Forward' },
-      { tag_id: 4, tag_name: 'Goalkeeper' },
-      { tag_id: 5, tag_name: 'Captain' },
+      { tag_id: 0, tag_name: 'Defender' },
+      { tag_id: 1, tag_name: 'Midfielder' },
+      { tag_id: 2, tag_name: 'Forward' },
+      { tag_id: 3, tag_name: 'Goalkeeper' },
+      { tag_id: 4, tag_name: 'Captain' },
     ],
   })
 
@@ -185,7 +185,7 @@ async function seed() {
       },
       {
         year: 2016,
-        sofifa_id: 0,
+        sofifa_id: 1,
         club_team_id: 1,
         club_position: 'RW',
         club_jersey_number: 9,

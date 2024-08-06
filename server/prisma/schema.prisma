@@ -25,6 +25,7 @@ model PlayerStats {
   PlayerPositions PlayerPositions[]
   PlayerTags      PlayerTags[]
   PlayerTraits    PlayerTraits[]
+  PlayerClub      PlayerClub[]
   Player          Player            @relation(fields: [sofifa_id], references: [sofifa_id])
 
   @@id([sofifa_id, year])
@@ -106,14 +107,16 @@ model PlayerClub {
   club_joined               DateTime @default(now())
   club_contract_valid_until DateTime @default(now())
 
-  Club Club @relation(fields: [club_team_id], references: [club_team_id])
+  Club        Club        @relation(fields: [club_team_id], references: [club_team_id])
+  PlayerStats PlayerStats @relation(fields: [sofifa_id, year], references: [sofifa_id, year])
 
   @@id([sofifa_id, year, club_team_id])
 }
 
 model Trait {
-  trait_id   Int    @id
-  trait_name String
+  trait_id     Int            @id
+  trait_name   String
+  PlayerTraits PlayerTraits[]
 }
 
 model PlayerTraits {
@@ -121,20 +124,25 @@ model PlayerTraits {
   year      Int
   trait_id  Int
 
+  Trait Trait @relation(fields: [trait_id], references: [trait_id])
+
   PlayerStats PlayerStats @relation(fields: [sofifa_id, year], references: [sofifa_id, year])
 
   @@id([sofifa_id, year, trait_id])
 }
 
 model Tag {
-  tag_id   Int    @id
-  tag_name String
+  tag_id     Int          @id
+  tag_name   String
+  PlayerTags PlayerTags[]
 }
 
 model PlayerTags {
   sofifa_id Int
   year      Int
   tag_id    Int
+
+  Tag Tag @relation(fields: [tag_id], references: [tag_id])
 
   PlayerStats PlayerStats @relation(fields: [sofifa_id, year], references: [sofifa_id, year])
 
