@@ -8,4 +8,12 @@ export class GetNationResponse {
     this.nationality_name = NationObj.nationality_name
     this.nation_flag_url = NationObj.nation_flag_url
   }
+
+  static fromArray(Nation: any[]): GetNationResponse[] {
+    return Nation.map((response) => new GetNationResponse(response))
+  }
+
+  static getNames(Nation: any[]): string[] {
+    return Nation.map((response) => response.nationality_name)
+  }
 }

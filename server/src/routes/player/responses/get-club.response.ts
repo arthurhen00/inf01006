@@ -1,5 +1,5 @@
 import { GetLeagueResponse } from './get-league.response'
-import { GetNationResponse } from './get-nation.response'
+import { GetNationResponse } from '@src/routes/nation/responses'
 
 export class GetClubResponse {
   club_team_id: number

@@ -1,4 +1,4 @@
-import { GetNationResponse } from './get-nation.response'
+import { GetNationResponse } from '@src/routes/nation/responses'
 import { GetPlayerStatsResponse } from './get-players-stats.response'
 
 export class GetPlayerResponse {
