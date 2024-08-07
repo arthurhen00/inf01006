@@ -9,7 +9,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useSearchParams } from 'react-router-dom'
 import { Search } from 'lucide-react'
-import { CountrySelect } from './CountrySelect'
+import { NationSelect } from './NationSelect'
 
 const cardsFiltersSchema = z.object({
   player_name: z.string(),
@@ -19,7 +19,7 @@ const cardsFiltersSchema = z.object({
   minPotential: z.coerce.string(),
   maxPotential: z.coerce.string(),
   foot: z.string(),
-  country: z.string(),
+  nation: z.string(),
 })
 export type CardsFiltersSchema = z.infer<typeof cardsFiltersSchema>
 
@@ -35,9 +35,12 @@ export function CardFilter() {
       minPotential: '',
       maxPotential: '',
       foot: 'any',
-      country: 'any',
+      nation: 'any',
     },
   })
+  /**
+   * Posicao, Liga, Clube, Nação
+   */
 
   function handleFilterCards(data: CardsFiltersSchema) {
     console.log(data, searchParams)
@@ -46,76 +49,6 @@ export function CardFilter() {
         state.set('player_name', data.player_name)
       } else {
         state.delete('player_name')
-      }
-
-      return state
-    })
-
-    setSearchParams((state) => {
-      if (data.year) {
-        state.set('year', data.year)
-      } else {
-        state.delete('year')
-      }
-
-      return state
-    })
-
-    setSearchParams((state) => {
-      if (data.minOverall) {
-        state.set('minOverall', data.minOverall)
-      } else {
-        state.delete('minOverall')
-      }
-
-      return state
-    })
-
-    setSearchParams((state) => {
-      if (data.maxOverall) {
-        state.set('maxOverall', data.maxOverall)
-      } else {
-        state.delete('maxOverall')
-      }
-
-      return state
-    })
-
-    setSearchParams((state) => {
-      if (data.minPotential) {
-        state.set('minPotential', data.minPotential)
-      } else {
-        state.delete('minPotential')
-      }
-
-      return state
-    })
-
-    setSearchParams((state) => {
-      if (data.foot) {
-        state.set('foot', data.foot)
-      } else {
-        state.delete('foot')
-      }
-
-      return state
-    })
-
-    setSearchParams((state) => {
-      if (data.maxPotential) {
-        state.set('maxPotential', data.maxPotential)
-      } else {
-        state.delete('maxPotential')
-      }
-
-      return state
-    })
-
-    setSearchParams((state) => {
-      if (data.country) {
-        state.set('country', data.country)
-      } else {
-        state.delete('country')
       }
 
       return state
@@ -144,10 +77,10 @@ export function CardFilter() {
         </div>
         <div className="flex items-center justify-between gap-x-2">
           <Label>Player nation</Label>
-          <CountrySelect control={methods.control} />
+          <NationSelect control={methods.control} />
         </div>
         <Separator className="bg-fst-200" />
-        <Button className="text-snd-100 border-snd-300 bg-fst-800 self-end border-[1px]">
+        <Button className="self-end border-[1px] border-snd-300 bg-fst-800 text-snd-100">
           Procurar
           <Search className="ml-2 h-4 w-4" />
         </Button>
