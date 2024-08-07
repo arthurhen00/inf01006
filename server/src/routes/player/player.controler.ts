@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common'
 import { GetPlayerUseCase, GetPlayersUseCase, GetFilteredPlayersUseCase } from './use-cases'
 import { GetFilteredPlayersRequest, GetPlayerRequest } from './requests'
-import { GetFilteredPlayersResponse, GetPlayerResponse } from './responses'
+import { GetPlayerResponse } from './responses'
 import { validate } from 'class-validator'
 import { plainToClass } from 'class-transformer'
 
@@ -22,7 +22,7 @@ export class PlayerController {
   @Get('players')
   async getPlayers() {
     const players = await this.getPlayersUseCase.exec()
-    return players
+    return GetPlayerResponse.fromArray(players)
   }
 
   @Post('players/filtered')
@@ -37,6 +37,6 @@ export class PlayerController {
     }
 
     const players = await this.getFilteredPlayersUseCase.exec(body)
-    return GetFilteredPlayersResponse.fromArray(players)
+    return GetPlayerResponse.fromArray(players)
   }
 }

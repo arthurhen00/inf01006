@@ -2,6 +2,48 @@ import { Injectable } from '@nestjs/common'
 import { prisma } from '@src/lib/prisma'
 import { GetFilteredPlayersRequest } from '../requests'
 
+const playerInclude = {
+  Nation: true,
+  PlayerStats: {
+    include: {
+      PlayerClub: {
+        include: {
+          Club: {
+            include: {
+              League: true,
+              Nation: true,
+            },
+          },
+        },
+      },
+      PlayerPositions: {
+        include: {
+          Position: true,
+        },
+      },
+      PlayerTags: {
+        include: {
+          Tag: true,
+        },
+      },
+      PlayerTraits: {
+        include: {
+          Trait: true,
+        },
+      },
+    },
+  },
+  PlayerNation: {
+    include: {
+      NationTeam: {
+        include: {
+          Nation: true,
+        },
+      },
+    },
+  },
+}
+
 @Injectable()
 export class PlayerRepository {
   async findById(id: number) {
@@ -9,6 +51,7 @@ export class PlayerRepository {
       where: {
         sofifa_id: id,
       },
+      include: playerInclude,
     })
   }
 
@@ -19,57 +62,13 @@ export class PlayerRepository {
           contains: filter.name,
         },
       },
-      include: {
-        Nation: true,
-        PlayerStats: {
-          include: {
-            PlayerClub: {
-              include: {
-                Club: {
-                  include: {
-                    League: true,
-                    Nation: true,
-                  },
-                },
-              },
-            },
-            PlayerPositions: {
-              include: {
-                Position: true,
-              },
-            },
-            PlayerTags: {
-              /*select: {
-                sofifa_id: false,
-                year: false,
-                tag_id: false,
-                Tag: true,
-              },*/
-              include: {
-                Tag: true,
-              },
-            },
-            PlayerTraits: {
-              include: {
-                Trait: true,
-              },
-            },
-          },
-        },
-        PlayerNation: {
-          include: {
-            NationTeam: {
-              include: {
-                Nation: true,
-              },
-            },
-          },
-        },
-      },
+      include: playerInclude,
     })
   }
 
   async findAll() {
-    return await prisma.player.findMany({})
+    return await prisma.player.findMany({
+      include: playerInclude,
+    })
   }
 }
