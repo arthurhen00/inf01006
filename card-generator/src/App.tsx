@@ -1,11 +1,9 @@
-import { Card } from './components/Card'
-import { CardFilter } from './components/CardFilter'
-import { ScrollArea } from './components/ui/scroll-area'
-import { Separator } from './components/ui/separator'
+import { Card, CardFilter } from './components'
+import { ScrollArea, Separator } from './components/ui'
 
 export function App() {
   return (
-    <main className="bg-fst-900 text-snd-100 flex h-screen flex-row px-12 py-6">
+    <main className="flex h-screen flex-row bg-fst-900 px-12 py-6 text-snd-100">
       <CardFilter />
 
       <Separator orientation="vertical" className="bg-fst-200" />
