@@ -1,5 +1,4 @@
-import { IsNumber, IsString, Max, Min } from 'class-validator'
-import { IsOverallMaxGreaterThanMin } from '@src/lib/is-overall-max-greater-than-min.validator'
+import { IsNumber, IsString, Max, Min, IsOptional } from 'class-validator'
 
 export class GetFilteredPlayersRequest {
   @IsString()
@@ -15,9 +14,16 @@ export class GetFilteredPlayersRequest {
   @Max(100)
   overallMax: number
 
+  @IsNumber()
+  @Min(0)
+  @Max(100)
+  potentialMin: number
+
+  @IsNumber()
+  @Min(0)
+  @Max(100)
+  potentialMax: number
+
+  @IsString()
   preferedFoot: string
-
-  year: number
-
-  nation: string
 }

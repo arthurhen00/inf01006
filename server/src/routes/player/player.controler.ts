@@ -2,6 +2,8 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common'
 import { GetPlayerUseCase, GetPlayersUseCase, GetFilteredPlayersUseCase } from './use-cases'
 import { GetFilteredPlayersRequest, GetPlayerRequest } from './requests'
 import { GetFilteredPlayersResponse, GetPlayerResponse } from './responses'
+import { validate } from 'class-validator'
+import { plainToClass } from 'class-transformer'
 
 @Controller()
 export class PlayerController {
@@ -24,8 +26,17 @@ export class PlayerController {
   }
 
   @Post('players/filtered')
-  async getFilteredPlayers(@Body() getFilteredPlayersRequest: GetFilteredPlayersRequest) {
-    const players = await this.getFilteredPlayersUseCase.exec(getFilteredPlayersRequest)
+  async getFilteredPlayers(@Body() body: GetFilteredPlayersRequest) {
+    const getFilteredPlayersRequest = plainToClass(GetFilteredPlayersRequest, body)
+
+    const errors = await validate(getFilteredPlayersRequest)
+    if (errors.length > 0) {
+      console.log('validation failed. error: ', errors)
+    } else {
+      console.log('validation succeeded')
+    }
+
+    const players = await this.getFilteredPlayersUseCase.exec(body)
     return GetFilteredPlayersResponse.fromArray(players)
   }
 }
