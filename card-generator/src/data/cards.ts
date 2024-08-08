@@ -11,72 +11,72 @@ export async function getCards(filters: CardsFiltersSchema) {
   return response.data
 }
 
-const emptyStringOrUndefinedToNull = (value: unknown) => {
-  return value === '' || value === undefined ? null : value
+const emptyStringOrUndefinedOrAnyToNull = (value: unknown) => {
+  return value === 'any' || value === '' || value === undefined ? null : value
 }
 
 export const cardsFiltersSchema = z.object({
   player_name: z.string().optional().nullable(),
   min_overall: z.preprocess(
-    (val) => emptyStringOrUndefinedToNull(val as string),
+    (val) => emptyStringOrUndefinedOrAnyToNull(val as string),
     z.coerce.number().min(0).max(100).optional().nullable(),
   ),
   max_overall: z.preprocess(
-    (val) => emptyStringOrUndefinedToNull(val as string),
+    (val) => emptyStringOrUndefinedOrAnyToNull(val as string),
     z.coerce.number().min(0).max(100).optional().nullable(),
   ),
   min_pac: z.preprocess(
-    (val) => emptyStringOrUndefinedToNull(val as string),
+    (val) => emptyStringOrUndefinedOrAnyToNull(val as string),
     z.coerce.number().min(0).max(100).optional().nullable(),
   ),
   max_pac: z.preprocess(
-    (val) => emptyStringOrUndefinedToNull(val as string),
+    (val) => emptyStringOrUndefinedOrAnyToNull(val as string),
     z.coerce.number().min(0).max(100).optional().nullable(),
   ),
   min_sho: z.preprocess(
-    (val) => emptyStringOrUndefinedToNull(val as string),
+    (val) => emptyStringOrUndefinedOrAnyToNull(val as string),
     z.coerce.number().min(0).max(100).optional().nullable(),
   ),
   max_sho: z.preprocess(
-    (val) => emptyStringOrUndefinedToNull(val as string),
+    (val) => emptyStringOrUndefinedOrAnyToNull(val as string),
     z.coerce.number().min(0).max(100).optional().nullable(),
   ),
   min_pas: z.preprocess(
-    (val) => emptyStringOrUndefinedToNull(val as string),
+    (val) => emptyStringOrUndefinedOrAnyToNull(val as string),
     z.coerce.number().min(0).max(100).optional().nullable(),
   ),
   max_pas: z.preprocess(
-    (val) => emptyStringOrUndefinedToNull(val as string),
+    (val) => emptyStringOrUndefinedOrAnyToNull(val as string),
     z.coerce.number().min(0).max(100).optional().nullable(),
   ),
   min_dri: z.preprocess(
-    (val) => emptyStringOrUndefinedToNull(val as string),
+    (val) => emptyStringOrUndefinedOrAnyToNull(val as string),
     z.coerce.number().min(0).max(100).optional().nullable(),
   ),
   max_dri: z.preprocess(
-    (val) => emptyStringOrUndefinedToNull(val as string),
+    (val) => emptyStringOrUndefinedOrAnyToNull(val as string),
     z.coerce.number().min(0).max(100).optional().nullable(),
   ),
   min_def: z.preprocess(
-    (val) => emptyStringOrUndefinedToNull(val as string),
+    (val) => emptyStringOrUndefinedOrAnyToNull(val as string),
     z.coerce.number().min(0).max(100).optional().nullable(),
   ),
   max_def: z.preprocess(
-    (val) => emptyStringOrUndefinedToNull(val as string),
+    (val) => emptyStringOrUndefinedOrAnyToNull(val as string),
     z.coerce.number().min(0).max(100).optional().nullable(),
   ),
   min_phy: z.preprocess(
-    (val) => emptyStringOrUndefinedToNull(val as string),
+    (val) => emptyStringOrUndefinedOrAnyToNull(val as string),
     z.coerce.number().min(0).max(100).optional().nullable(),
   ),
   max_phy: z.preprocess(
-    (val) => emptyStringOrUndefinedToNull(val as string),
+    (val) => emptyStringOrUndefinedOrAnyToNull(val as string),
     z.coerce.number().min(0).max(100).optional().nullable(),
   ),
-  foot: z.string().optional().nullable(),
-  year: z.string().optional().nullable(),
-  nation: z.string().optional().nullable(),
-  position: z.string().optional().nullable(),
+  foot: z.preprocess((val) => emptyStringOrUndefinedOrAnyToNull(val as string), z.string().optional().nullable()),
+  year: z.preprocess((val) => emptyStringOrUndefinedOrAnyToNull(val as string), z.string().optional().nullable()),
+  nation: z.preprocess((val) => emptyStringOrUndefinedOrAnyToNull(val as string), z.string().optional().nullable()),
+  position: z.preprocess((val) => emptyStringOrUndefinedOrAnyToNull(val as string), z.string().optional().nullable()),
 })
 
 export type CardsFiltersSchema = z.infer<typeof cardsFiltersSchema>

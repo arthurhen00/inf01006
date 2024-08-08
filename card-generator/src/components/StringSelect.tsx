@@ -1,7 +1,7 @@
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from './ui'
-import { CardsFiltersSchema } from '.'
 import { Control, Controller } from 'react-hook-form'
 import { useEffect, useState } from 'react'
+import { CardsFiltersSchema } from '@/data'
 
 interface SelectProps {
   control: Control<CardsFiltersSchema>
@@ -25,7 +25,7 @@ export function StringSelect({ control, name, fetchData }: SelectProps) {
       name={name}
       control={control}
       render={({ field }) => (
-        <Select value={field.value} onValueChange={field.onChange}>
+        <Select value={field.value ? String(field.value) : undefined} onValueChange={field.onChange}>
           <SelectTrigger className="w-36 border-none bg-fst-800">
             <SelectValue placeholder="TESTE" />
           </SelectTrigger>

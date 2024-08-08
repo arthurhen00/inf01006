@@ -53,11 +53,11 @@ export function CardFilter() {
         </div>
         <div className="flex items-center justify-between gap-x-2">
           <Label>Card year</Label>
-          <StringSelect control={methods.control} name={'nation'} fetchData={getNations} />
+          <StringSelect control={methods.control} name={'year'} fetchData={getYears} />
         </div>
         <div className="flex items-center justify-between gap-x-2">
           <Label>Player nation</Label>
-          <StringSelect control={methods.control} name={'year'} fetchData={getYears} />
+          <StringSelect control={methods.control} name={'nation'} fetchData={getNations} />
         </div>
         <div className="flex items-center justify-between gap-x-2">
           <Label>Player position</Label>
