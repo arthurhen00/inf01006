@@ -26,6 +26,7 @@ export function Card(player: Player) {
                     <img src={clubData.Club?.club_logo_url ?? 'default_club_logo_url.png'} className="h-9 w-10" />
                   </div>
                   <div className="flex items-end">
+                    <p className="absolute ml-16">{yearData.year}</p>
                     <img src="https://cdn.sofifa.net/players/158/023/22_120.png"></img>
                   </div>
                 </div>
@@ -61,6 +62,7 @@ export function Card(player: Player) {
                   <img src="https://placehold.co/48/EEE/31343C" className="h-9 w-10" />
                 </div>
                 <div className="flex items-end">
+                  <p className="absolute ml-16">{yearData.year}</p>
                   <img src="https://placehold.co/100/EEE/31343C"></img>
                 </div>
               </div>

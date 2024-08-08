@@ -56,13 +56,13 @@ export class PlayerRepository {
   }
 
   async findByFilters(filter: GetFilteredPlayersRequest) {
-    return await prisma.player.findMany({
+    const players = await prisma.player.findMany({
       where: {
         long_name: filter.name ? { contains: filter.name } : undefined,
         Nation: filter.nation ? { nationality_name: filter.nation } : undefined,
         PlayerStats: {
           some: {
-            year: filter.year ? parseInt(filter.year) : undefined,
+            year: filter.year ? filter.year : undefined,
             overall: {
               gte: filter.min_overall ?? undefined,
               lte: filter.max_overall ?? undefined,
@@ -90,7 +90,7 @@ export class PlayerRepository {
             physic: {
               gte: filter.min_phy ?? undefined,
               lte: filter.min_phy ?? undefined,
-            },
+            } /*
             PlayerPositions: filter.position
               ? {
                   some: {
@@ -99,12 +99,66 @@ export class PlayerRepository {
                     },
                   },
                 }
+              : undefined,*/,
+            PlayerClub: filter.position
+              ? {
+                  some: {
+                    club_position: filter.position,
+                  },
+                }
               : undefined,
           },
         },
       },
       include: playerInclude,
     })
+
+    // TODO
+    // mudar no futuro
+    const filteredPlayers = players.map((player) => ({
+      ...player,
+      PlayerStats: player.PlayerStats.filter((stats) => {
+        const yearMatches = filter.year ? stats.year === filter.year : true
+        const overallMatches =
+          (filter.min_overall === null || filter.min_overall === undefined || stats.overall >= filter.min_overall) &&
+          (filter.max_overall === null || filter.max_overall === undefined || stats.overall <= filter.max_overall)
+        const paceMatches =
+          (filter.min_pac === null || filter.min_pac === undefined || stats.pace >= filter.min_pac) &&
+          (filter.max_pac === null || filter.max_pac === undefined || stats.pace <= filter.max_pac)
+        const dribblingMatches =
+          (filter.min_dri === null || filter.min_dri === undefined || stats.dribbling >= filter.min_dri) &&
+          (filter.max_dri === null || filter.max_dri === undefined || stats.dribbling <= filter.max_dri)
+        const shootingMatches =
+          (filter.min_sho === null || filter.min_sho === undefined || stats.shooting >= filter.min_sho) &&
+          (filter.max_sho === null || filter.max_sho === undefined || stats.shooting <= filter.max_sho)
+        const defendingMatches =
+          (filter.min_def === null || filter.min_def === undefined || stats.defending >= filter.min_def) &&
+          (filter.max_def === null || filter.max_def === undefined || stats.defending <= filter.max_def)
+        const passingMatches =
+          (filter.min_pas === null || filter.min_pas === undefined || stats.passing >= filter.min_pas) &&
+          (filter.max_pas === null || filter.max_pas === undefined || stats.passing <= filter.max_pas)
+        const physicMatches =
+          (filter.min_phy === null || filter.min_phy === undefined || stats.physic >= filter.min_phy) &&
+          (filter.max_phy === null || filter.max_phy === undefined || stats.physic <= filter.max_phy)
+        const clubPositionMatches = filter.position
+          ? stats.PlayerClub.some((club) => club.club_position === filter.position)
+          : true
+
+        return (
+          yearMatches &&
+          overallMatches &&
+          paceMatches &&
+          dribblingMatches &&
+          shootingMatches &&
+          defendingMatches &&
+          passingMatches &&
+          physicMatches &&
+          clubPositionMatches
+        )
+      }),
+    }))
+
+    return filteredPlayers
   }
 
   async findAll() {

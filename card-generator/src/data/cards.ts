@@ -59,6 +59,21 @@ export async function getCards(filters: CardsFiltersSchema) {
     name: filters.player_name,
     min_overall: filters.min_overall,
     max_overall: filters.max_overall,
+    min_pace: filters.min_pac,
+    max_pace: filters.max_pac,
+    min_shooting: filters.min_sho,
+    max_shooting: filters.max_sho,
+    min_passing: filters.min_pas,
+    max_passing: filters.max_pas,
+    min_dribbling: filters.min_dri,
+    max_dribbling: filters.max_dri,
+    min_defending: filters.min_def,
+    max_defending: filters.max_def,
+    min_physic: filters.min_phy,
+    max_physic: filters.max_phy,
+    year: filters.year,
+    nation: filters.nation,
+    position: filters.position,
   })
 
   return response.data

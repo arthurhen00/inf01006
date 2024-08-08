@@ -94,8 +94,8 @@ export class GetFilteredPlayersRequest {
   foot: string
 
   @IsOptional()
-  @IsString()
-  year: string
+  @IsNumber()
+  year: number
 
   @IsOptional()
   @IsString()
