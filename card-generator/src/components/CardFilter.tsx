@@ -1,32 +1,22 @@
-import { getNations, getYears, getPositions, CardsFiltersSchema, cardsFiltersSchema, getCards } from '@/data'
+import { getNations, getYears, getPositions, CardsFiltersSchema, cardsFiltersSchema, getCards, Player } from '@/data'
 import { Button, Input, Label, Separator } from './ui'
 import { StatsPopover, StringSelect } from '.'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useSearchParams } from 'react-router-dom'
 import { Search } from 'lucide-react'
 
-export function CardFilter() {
-  const [searchParams, setSearchParams] = useSearchParams()
+interface props {
+  onFilter: React.Dispatch<React.SetStateAction<Player[] | never[]>>
+}
 
+export function CardFilter({ onFilter }: props) {
   const methods = useForm<CardsFiltersSchema>({
     resolver: zodResolver(cardsFiltersSchema),
   })
 
   async function handleFilterCards(data: CardsFiltersSchema) {
-    console.log(data, searchParams)
-    setSearchParams((state) => {
-      if (data.player_name) {
-        state.set('player_name', data.player_name)
-      } else {
-        state.delete('player_name')
-      }
-
-      return state
-    })
-
     const cards = await getCards(data)
-    console.log(cards)
+    onFilter(cards)
   }
 
   return (
