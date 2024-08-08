@@ -8,62 +8,152 @@ datasource db {
 }
 
 model Player {
-  sofifa_id  Int    @id
-  player_url String @unique
-  short_name String
-  long_name  String
-
+  sofifa_id      Int    @id
+  player_url     String @unique
+  short_name     String
+  long_name      String
   nationality_id Int
-  Nation         Nation         @relation(fields: [nationality_id], references: [nationality_id])
-  PlayerStats    PlayerStats[]
-  PlayerNation   PlayerNation[]
+
+  Nation Nation @relation(fields: [nationality_id], references: [nationality_id])
+
+  PlayerStats  PlayerStats[]
+  PlayerNation PlayerNation[]
 }
 
 model PlayerStats {
-  sofifa_id       Int
-  year            Int
+  sofifa_id                   Int
+  year                        Int
+  overall                     Int?
+  potential                   Int?
+  value_eur                   Float?
+  wage_eur                    Float?
+  age                         Int?
+  dob                         String?
+  height_cm                   Int?
+  weight_kg                   Int?
+  club_name                   Int?
+  preferred_foot              String?
+  weak_foot                   Int?
+  skill_moves                 Int?
+  international_reputation    Int?
+  work_rate                   String?
+  body_type                   String?
+  real_face                   String?
+  pace                        Int?
+  shooting                    Int?
+  passing                     Int?
+  dribbling                   Int?
+  defending                   Int?
+  physic                      Int?
+  attacking_crossing          Int?
+  attacking_finishing         Int?
+  attacking_heading_accuracy  Int?
+  attacking_short_passing     Int?
+  attacking_volleys           Int?
+  skill_dribbling             Int?
+  skill_curve                 Int?
+  skill_fk_accuracy           Int?
+  skill_long_passing          Int?
+  skill_ball_control          Int?
+  movement_acceleration       Int?
+  movement_sprint_speed       Int?
+  movement_agility            Int?
+  movement_reactions          Int?
+  movement_balance            Int?
+  power_shot_power            Int?
+  power_jumping               Int?
+  power_stamina               Int?
+  power_strength              Int?
+  power_long_shots            Int?
+  mentality_aggression        Int?
+  mentality_interceptions     Int?
+  mentality_positioning       Int?
+  mentality_vision            Int?
+  mentality_penalties         Int?
+  mentality_composure         Int?
+  defending_marking_awareness Int?
+  defending_standing_tackle   Int?
+  defending_sliding_tackle    Int?
+  goalkeeping_diving          Int?
+  goalkeeping_handling        Int?
+  goalkeeping_kicking         Int?
+  goalkeeping_positioning     Int?
+  goalkeeping_reflexes        Int?
+  goalkeeping_speed           Int?
+  ls                          String?
+  st                          String?
+  rs                          String?
+  lw                          String?
+  lf                          String?
+  cf                          String?
+  rf                          String?
+  rw                          String?
+  lam                         String?
+  cam                         String?
+  ram                         String?
+  lm                          String?
+  lcm                         String?
+  cm                          String?
+  rcm                         String?
+  rm                          String?
+  lwb                         String?
+  ldm                         String?
+  cdm                         String?
+  rdm                         String?
+  rwb                         String?
+  lb                          String?
+  lcb                         String?
+  cb                          String?
+  rcb                         String?
+  rb                          String?
+  gk                          String?
+  player_face_url             String?
+
   PlayerPositions PlayerPositions[]
   PlayerTags      PlayerTags[]
   PlayerTraits    PlayerTraits[]
   PlayerClub      PlayerClub[]
-  Player          Player            @relation(fields: [sofifa_id], references: [sofifa_id])
+
+  Player Player @relation(fields: [sofifa_id], references: [sofifa_id])
 
   @@id([sofifa_id, year])
 }
 
 model Nation {
-  nationality_id   Int          @id
+  nationality_id   Int    @id
   nationality_name String
   nation_flag_url  String
-  NationTeam       NationTeam[]
-  Club             Club[]
-  Player           Player[]
+
+  NationTeam NationTeam[]
+  Club       Club[]
+  Player     Player[]
 }
 
 model NationTeam {
   nation_team_id  Int    @id
   nation_logo_url String
+  nationality_id  Int
 
-  nationality_id Int
-  Nation         Nation         @relation(fields: [nationality_id], references: [nationality_id])
-  PlayerNation   PlayerNation[]
+  Nation       Nation         @relation(fields: [nationality_id], references: [nationality_id])
+  PlayerNation PlayerNation[]
 }
 
 model PlayerNation {
   nation_position      Int
   nation_jersey_number Int
+  sofifa_id            Int
+  nation_team_id       Int
 
-  sofifa_id      Int
-  nation_team_id Int
-  Player         Player     @relation(fields: [sofifa_id], references: [sofifa_id])
-  NationTeam     NationTeam @relation(fields: [nation_team_id], references: [nation_team_id])
+  Player     Player     @relation(fields: [sofifa_id], references: [sofifa_id])
+  NationTeam NationTeam @relation(fields: [nation_team_id], references: [nation_team_id])
 
   @@id([sofifa_id])
 }
 
 model Position {
-  position_id     Int               @id
-  position_name   String
+  position_id   Int    @id
+  position_name String
+
   PlayerPositions PlayerPositions[]
 }
 
@@ -71,6 +161,7 @@ model PlayerPositions {
   sofifa_id   Int
   year        Int
   position_id Int
+
   Position    Position    @relation(fields: [position_id], references: [position_id])
   PlayerStats PlayerStats @relation(fields: [sofifa_id, year], references: [sofifa_id, year])
 
@@ -81,31 +172,33 @@ model League {
   league_id    Int    @id
   league_name  String
   league_level Int
-  Club         Club[]
+
+  Club Club[]
 }
 
 model Club {
-  club_team_id  Int    @id
-  club_name     String
-  club_logo_url String
-  club_flag_url String
-
+  club_team_id   Int    @id
+  club_name      String
+  club_logo_url  String
+  club_flag_url  String
   league_id      Int
   nationality_id Int
-  League         League       @relation(fields: [league_id], references: [league_id])
-  Nation         Nation       @relation(fields: [nationality_id], references: [nationality_id])
-  PlayerClub     PlayerClub[]
+
+  League     League       @relation(fields: [league_id], references: [league_id])
+  Nation     Nation       @relation(fields: [nationality_id], references: [nationality_id])
+  PlayerClub PlayerClub[]
 }
 
 model PlayerClub {
-  sofifa_id    Int
-  year         Int
-  club_team_id Int
-
+  sofifa_id                 Int
+  year                      Int
+  club_team_id              Int
   club_position             String
   club_jersey_number        Int
   club_joined               DateTime @default(now())
   club_contract_valid_until DateTime @default(now())
+  release_clause_eur        Float?
+  club_loaned_from          String?
 
   Club        Club        @relation(fields: [club_team_id], references: [club_team_id])
   PlayerStats PlayerStats @relation(fields: [sofifa_id, year], references: [sofifa_id, year])
@@ -114,8 +207,9 @@ model PlayerClub {
 }
 
 model Trait {
-  trait_id     Int            @id
-  trait_name   String
+  trait_id   Int    @id
+  trait_name String
+
   PlayerTraits PlayerTraits[]
 }
 
@@ -124,16 +218,16 @@ model PlayerTraits {
   year      Int
   trait_id  Int
 
-  Trait Trait @relation(fields: [trait_id], references: [trait_id])
-
+  Trait       Trait       @relation(fields: [trait_id], references: [trait_id])
   PlayerStats PlayerStats @relation(fields: [sofifa_id, year], references: [sofifa_id, year])
 
   @@id([sofifa_id, year, trait_id])
 }
 
 model Tag {
-  tag_id     Int          @id
-  tag_name   String
+  tag_id   Int    @id
+  tag_name String
+
   PlayerTags PlayerTags[]
 }
 
@@ -142,8 +236,7 @@ model PlayerTags {
   year      Int
   tag_id    Int
 
-  Tag Tag @relation(fields: [tag_id], references: [tag_id])
-
+  Tag         Tag         @relation(fields: [tag_id], references: [tag_id])
   PlayerStats PlayerStats @relation(fields: [sofifa_id, year], references: [sofifa_id, year])
 
   @@id([sofifa_id, year, tag_id])

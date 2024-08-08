@@ -129,8 +129,8 @@ async function seed() {
 
   await prisma.playerStats.createMany({
     data: [
-      { year: 2015, sofifa_id: 0 },
-      { year: 2015, sofifa_id: 1 },
+      { year: 2015, sofifa_id: 0, overall: 50 },
+      { year: 2015, sofifa_id: 1, overall: 60 },
       { year: 2016, sofifa_id: 1 },
       { year: 2015, sofifa_id: 2 },
     ],
