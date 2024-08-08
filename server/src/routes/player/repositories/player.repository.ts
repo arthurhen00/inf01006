@@ -63,6 +63,34 @@ export class PlayerRepository {
         PlayerStats: {
           some: {
             year: filter.year ? parseInt(filter.year) : undefined,
+            overall: {
+              gte: filter.min_overall ?? undefined,
+              lte: filter.max_overall ?? undefined,
+            },
+            pace: {
+              gte: filter.min_pac ?? undefined,
+              lte: filter.min_pac ?? undefined,
+            },
+            dribbling: {
+              gte: filter.min_dri ?? undefined,
+              lte: filter.min_dri ?? undefined,
+            },
+            shooting: {
+              gte: filter.min_sho ?? undefined,
+              lte: filter.min_sho ?? undefined,
+            },
+            defending: {
+              gte: filter.min_def ?? undefined,
+              lte: filter.min_def ?? undefined,
+            },
+            passing: {
+              gte: filter.min_pas ?? undefined,
+              lte: filter.min_pas ?? undefined,
+            },
+            physic: {
+              gte: filter.min_phy ?? undefined,
+              lte: filter.min_phy ?? undefined,
+            },
             PlayerPositions: filter.position
               ? {
                   some: {

@@ -6,7 +6,6 @@ export class GetPlayerResponse {
   player_url: string
   short_name: string
   long_name: string
-  nationality_id: number
   Nation: object
   PlayerStats: object
 
@@ -15,7 +14,6 @@ export class GetPlayerResponse {
     this.player_url = response.player_url
     this.short_name = response.short_name
     this.long_name = response.long_name
-    this.nationality_id = response.nationality_id
     this.Nation = new GetNationResponse(response.Nation)
     this.PlayerStats = GetPlayerStatsResponse.fromArray(response.PlayerStats)
   }
