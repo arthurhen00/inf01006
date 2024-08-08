@@ -61,6 +61,21 @@ export class PlayerRepository {
         long_name: {
           contains: filter.name,
         },
+        Nation: {
+          nationality_name: filter.nation,
+        },
+        PlayerStats: {
+          some: {
+            year: parseInt(filter.year),
+            PlayerPositions: {
+              some: {
+                Position: {
+                  position_name: filter.position,
+                },
+              },
+            },
+          },
+        },
       },
       include: playerInclude,
     })

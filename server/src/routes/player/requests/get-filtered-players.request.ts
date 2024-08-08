@@ -9,27 +9,99 @@ export class GetFilteredPlayersRequest {
   @IsNumber()
   @Min(0)
   @Max(100)
-  overallMin: number
+  min_overall: number
 
   @IsOptional()
   @IsNumber()
   @Min(0)
   @Max(100)
-  overallMax: number
+  max_overall: number
 
   @IsOptional()
   @IsNumber()
   @Min(0)
   @Max(100)
-  potentialMin: number
+  min_pac: number
 
   @IsOptional()
   @IsNumber()
   @Min(0)
   @Max(100)
-  potentialMax: number
+  max_pac: number
+
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  @Max(100)
+  min_sho: number
+
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  @Max(100)
+  max_sho: number
+
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  @Max(100)
+  min_pas: number
+
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  @Max(100)
+  max_pas: number
+
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  @Max(100)
+  min_dri: number
+
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  @Max(100)
+  max_dri: number
+
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  @Max(100)
+  min_def: number
+
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  @Max(100)
+  max_def: number
+
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  @Max(100)
+  min_phy: number
+
+  @IsOptional()
+  @IsNumber()
+  @Min(0)
+  @Max(100)
+  max_phy: number
 
   @IsOptional()
   @IsString()
-  preferedFoot: string
+  foot: string
+
+  @IsOptional()
+  @IsString()
+  year: string
+
+  @IsOptional()
+  @IsString()
+  nation: string
+
+  @IsOptional()
+  @IsString()
+  position: string
 }
