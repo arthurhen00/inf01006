@@ -1,4 +1,4 @@
-import { getNations, getYears, getPositions, CardsFiltersSchema, cardsFiltersSchema } from '@/data'
+import { getNations, getYears, getPositions, CardsFiltersSchema, cardsFiltersSchema, getCards } from '@/data'
 import { Button, Input, Label, Separator } from './ui'
 import { StatsPopover, StringSelect } from '.'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -19,7 +19,7 @@ export function CardFilter() {
     },
   })
 
-  function handleFilterCards(data: CardsFiltersSchema) {
+  async function handleFilterCards(data: CardsFiltersSchema) {
     console.log(data, searchParams)
     setSearchParams((state) => {
       if (data.player_name) {
@@ -30,6 +30,9 @@ export function CardFilter() {
 
       return state
     })
+
+    const cards = await getCards(data)
+    console.log(cards)
   }
 
   return (

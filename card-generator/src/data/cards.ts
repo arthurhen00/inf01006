@@ -1,40 +1,82 @@
+import { api } from '@/lib/api'
 import { z } from 'zod'
 
-interface GetCardsFilters {
-  player_name: string | null
-  minOverall: number | null
-  maxOverall: number | null
-  minPotential: number | null
-  foot: string | null
-  year: string | null
-  nation: string | null
-  position: string | null
+export async function getCards(filters: CardsFiltersSchema) {
+  const response = await api.post('/players/filtered', {
+    name: filters.player_name,
+    min_overall: filters.min_overall,
+    max_overall: filters.max_overall,
+  })
+
+  return response.data
 }
 
-export async function getCards(filters: GetCardsFilters) {
-  console.log(filters)
+const emptyStringOrUndefinedToNull = (value: unknown) => {
+  return value === '' || value === undefined ? null : value
 }
 
 export const cardsFiltersSchema = z.object({
-  player_name: z.string().optional(),
-  min_overall: z.coerce.number().optional(),
-  max_overall: z.coerce.number().optional(),
-  min_pac: z.coerce.number().optional(),
-  max_pac: z.coerce.number().optional(),
-  min_sho: z.coerce.number().optional(),
-  max_sho: z.coerce.number().optional(),
-  min_pas: z.coerce.number().optional(),
-  max_pas: z.coerce.number().optional(),
-  min_dri: z.coerce.number().optional(),
-  max_dri: z.coerce.number().optional(),
-  min_def: z.coerce.number().optional(),
-  max_def: z.coerce.number().optional(),
-  min_phy: z.coerce.number().optional(),
-  max_phy: z.coerce.number().optional(),
-  foot: z.string().optional(),
-  year: z.string().optional(),
-  nation: z.string().optional(),
-  position: z.string().optional(),
+  player_name: z.string().optional().nullable(),
+  min_overall: z.preprocess(
+    (val) => emptyStringOrUndefinedToNull(val as string),
+    z.coerce.number().min(0).max(100).optional().nullable(),
+  ),
+  max_overall: z.preprocess(
+    (val) => emptyStringOrUndefinedToNull(val as string),
+    z.coerce.number().min(0).max(100).optional().nullable(),
+  ),
+  min_pac: z.preprocess(
+    (val) => emptyStringOrUndefinedToNull(val as string),
+    z.coerce.number().min(0).max(100).optional().nullable(),
+  ),
+  max_pac: z.preprocess(
+    (val) => emptyStringOrUndefinedToNull(val as string),
+    z.coerce.number().min(0).max(100).optional().nullable(),
+  ),
+  min_sho: z.preprocess(
+    (val) => emptyStringOrUndefinedToNull(val as string),
+    z.coerce.number().min(0).max(100).optional().nullable(),
+  ),
+  max_sho: z.preprocess(
+    (val) => emptyStringOrUndefinedToNull(val as string),
+    z.coerce.number().min(0).max(100).optional().nullable(),
+  ),
+  min_pas: z.preprocess(
+    (val) => emptyStringOrUndefinedToNull(val as string),
+    z.coerce.number().min(0).max(100).optional().nullable(),
+  ),
+  max_pas: z.preprocess(
+    (val) => emptyStringOrUndefinedToNull(val as string),
+    z.coerce.number().min(0).max(100).optional().nullable(),
+  ),
+  min_dri: z.preprocess(
+    (val) => emptyStringOrUndefinedToNull(val as string),
+    z.coerce.number().min(0).max(100).optional().nullable(),
+  ),
+  max_dri: z.preprocess(
+    (val) => emptyStringOrUndefinedToNull(val as string),
+    z.coerce.number().min(0).max(100).optional().nullable(),
+  ),
+  min_def: z.preprocess(
+    (val) => emptyStringOrUndefinedToNull(val as string),
+    z.coerce.number().min(0).max(100).optional().nullable(),
+  ),
+  max_def: z.preprocess(
+    (val) => emptyStringOrUndefinedToNull(val as string),
+    z.coerce.number().min(0).max(100).optional().nullable(),
+  ),
+  min_phy: z.preprocess(
+    (val) => emptyStringOrUndefinedToNull(val as string),
+    z.coerce.number().min(0).max(100).optional().nullable(),
+  ),
+  max_phy: z.preprocess(
+    (val) => emptyStringOrUndefinedToNull(val as string),
+    z.coerce.number().min(0).max(100).optional().nullable(),
+  ),
+  foot: z.string().optional().nullable(),
+  year: z.string().optional().nullable(),
+  nation: z.string().optional().nullable(),
+  position: z.string().optional().nullable(),
 })
 
 export type CardsFiltersSchema = z.infer<typeof cardsFiltersSchema>

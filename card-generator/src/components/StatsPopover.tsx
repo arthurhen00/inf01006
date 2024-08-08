@@ -23,46 +23,130 @@ export function StatsPopover() {
           <div className="grid gap-2">
             <div className="grid grid-cols-3 items-center gap-2">
               <Label>Overall</Label>
-              <Input id="min-overall" placeholder="MIN" className="col-span-1 h-8" {...register('min_overall')} />
-              <Input id="max-overall" placeholder="MAX" className="col-span-1 h-8" {...register('max_overall')} />
+              <Input
+                type="number"
+                id="min-overall"
+                placeholder="MIN"
+                className="no-spinner col-span-1 h-8"
+                {...register('min_overall')}
+              />
+              <Input
+                type="number"
+                id="max-overall"
+                placeholder="MAX"
+                className="no-spinner col-span-1 h-8"
+                {...register('max_overall')}
+              />
             </div>
 
             <div className="grid grid-cols-3 items-center gap-2">
               <Label>Pace</Label>
-              <Input id="min-pac" placeholder="MIN" className="col-span-1 h-8" {...register('min_pac')} />
-              <Input id="max-pac" placeholder="MAX" className="col-span-1 h-8" {...register('max_pac')} />
+              <Input
+                type="number"
+                id="min-pac"
+                placeholder="MIN"
+                className="no-spinner col-span-1 h-8"
+                {...register('min_pac')}
+              />
+              <Input
+                type="number"
+                id="max-pac"
+                placeholder="MAX"
+                className="no-spinner col-span-1 h-8"
+                {...register('max_pac')}
+              />
             </div>
 
             <div className="grid grid-cols-3 items-center gap-2">
               <Label>Shooting</Label>
-              <Input id="min-sho" placeholder="MIN" className="col-span-1 h-8" {...register('min_sho')} />
-              <Input id="max-sho" placeholder="MAX" className="col-span-1 h-8" {...register('max_sho')} />
+              <Input
+                type="number"
+                id="min-sho"
+                placeholder="MIN"
+                className="no-spinner col-span-1 h-8"
+                {...register('min_sho')}
+              />
+              <Input
+                type="number"
+                id="max-sho"
+                placeholder="MAX"
+                className="no-spinner col-span-1 h-8"
+                {...register('max_sho')}
+              />
             </div>
 
             <div className="grid grid-cols-3 items-center gap-2">
               <Label>Passing</Label>
-              <Input id="min-pas" placeholder="MIN" className="col-span-1 h-8" {...register('min_pas')} />
-              <Input id="max-pas" placeholder="MAX" className="col-span-1 h-8" {...register('max_pas')} />
+              <Input
+                type="number"
+                id="min-pas"
+                placeholder="MIN"
+                className="no-spinner col-span-1 h-8"
+                {...register('min_pas')}
+              />
+              <Input
+                type="number"
+                id="max-pas"
+                placeholder="MAX"
+                className="no-spinner col-span-1 h-8"
+                {...register('max_pas')}
+              />
             </div>
 
             <div className="grid grid-cols-3 items-center gap-2">
               <Label>Dribbling</Label>
-              <Input id="min-dri" placeholder="MIN" className="col-span-1 h-8" {...register('min_dri')} />
-              <Input id="max-dri" placeholder="MAX" className="col-span-1 h-8" {...register('max_dri')} />
+              <Input
+                type="number"
+                id="min-dri"
+                placeholder="MIN"
+                className="no-spinner col-span-1 h-8"
+                {...register('min_dri')}
+              />
+              <Input
+                type="number"
+                id="max-dri"
+                placeholder="MAX"
+                className="no-spinner col-span-1 h-8"
+                {...register('max_dri')}
+              />
             </div>
 
             <div className="grid grid-cols-3 items-center gap-2">
               <Label>Defending</Label>
-              <Input id="min-def" placeholder="MIN" className="col-span-1 h-8" {...register('min_def')} />
-              <Input id="max-def" placeholder="MAX" className="col-span-1 h-8" {...register('max_def')} />
+              <Input
+                type="number"
+                id="min-def"
+                placeholder="MIN"
+                className="no-spinner col-span-1 h-8"
+                {...register('min_def')}
+              />
+              <Input
+                type="number"
+                id="max-def"
+                placeholder="MAX"
+                className="no-spinner col-span-1 h-8"
+                {...register('max_def')}
+              />
             </div>
 
             <div className="grid grid-cols-3 items-center gap-2">
               <Label>Physic</Label>
-              <Input id="min-phy" placeholder="MIN" className="col-span-1 h-8" {...register('min_phy')} />
-              <Input id="max-phy" placeholder="MAX" className="col-span-1 h-8" {...register('max_phy')} />
+              <Input
+                type="number"
+                id="min-phy"
+                placeholder="MIN"
+                className="no-spinner col-span-1 h-8"
+                {...register('min_phy')}
+              />
+              <Input
+                type="number"
+                id="max-phy"
+                placeholder="MAX"
+                className="no-spinner col-span-1 h-8"
+                {...register('max_phy')}
+              />
             </div>
-
+            {/*
             <div className="grid grid-cols-3 items-center gap-2">
               <Label>Preferred foot</Label>
               <div className="flex">
@@ -95,6 +179,7 @@ export function StatsPopover() {
                 </Label>
               </div>
             </div>
+            */}
           </div>
         </div>
       </PopoverContent>
