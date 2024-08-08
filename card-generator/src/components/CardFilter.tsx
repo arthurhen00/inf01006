@@ -11,12 +11,6 @@ export function CardFilter() {
 
   const methods = useForm<CardsFiltersSchema>({
     resolver: zodResolver(cardsFiltersSchema),
-    defaultValues: {
-      year: 'any',
-      foot: 'any',
-      nation: 'any',
-      position: 'any',
-    },
   })
 
   async function handleFilterCards(data: CardsFiltersSchema) {

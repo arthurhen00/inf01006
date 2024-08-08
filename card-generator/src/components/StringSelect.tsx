@@ -27,12 +27,12 @@ export function StringSelect({ control, name, fetchData }: SelectProps) {
       render={({ field }) => (
         <Select value={field.value ? String(field.value) : undefined} onValueChange={field.onChange}>
           <SelectTrigger className="w-36 border-none bg-fst-800">
-            <SelectValue placeholder="TESTE" />
+            <SelectValue placeholder={name} />
           </SelectTrigger>
           <SelectContent className="border-none bg-fst-800 text-snd-100">
             <SelectGroup>
               <SelectLabel>Year</SelectLabel>
-              <SelectItem value={'any'}>any</SelectItem>
+              <SelectItem value="any">Any</SelectItem>
               {values.map((value, index) => (
                 <SelectItem value={value} key={index}>
                   {value}
