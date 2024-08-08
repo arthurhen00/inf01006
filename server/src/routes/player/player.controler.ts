@@ -28,7 +28,7 @@ export class PlayerController {
   @Post('players/filtered')
   async getFilteredPlayers(@Body() body: GetFilteredPlayersRequest) {
     const getFilteredPlayersRequest = plainToClass(GetFilteredPlayersRequest, body)
-
+    console.log(getFilteredPlayersRequest)
     validate(getFilteredPlayersRequest).then((errors) => {
       if (errors.length > 0) {
         console.log('validation failed. errors: ', errors)

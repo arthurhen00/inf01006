@@ -58,22 +58,20 @@ export class PlayerRepository {
   async findByFilters(filter: GetFilteredPlayersRequest) {
     return await prisma.player.findMany({
       where: {
-        long_name: {
-          contains: filter.name,
-        },
-        Nation: {
-          nationality_name: filter.nation,
-        },
+        long_name: filter.name ? { contains: filter.name } : undefined,
+        Nation: filter.nation ? { nationality_name: filter.nation } : undefined,
         PlayerStats: {
           some: {
-            year: parseInt(filter.year),
-            PlayerPositions: {
-              some: {
-                Position: {
-                  position_name: filter.position,
-                },
-              },
-            },
+            year: filter.year ? parseInt(filter.year) : undefined,
+            PlayerPositions: filter.position
+              ? {
+                  some: {
+                    Position: {
+                      position_name: filter.position,
+                    },
+                  },
+                }
+              : undefined,
           },
         },
       },
