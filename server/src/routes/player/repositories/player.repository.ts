@@ -90,16 +90,7 @@ export class PlayerRepository {
             physic: {
               gte: filter.min_phy ?? undefined,
               lte: filter.min_phy ?? undefined,
-            } /*
-            PlayerPositions: filter.position
-              ? {
-                  some: {
-                    Position: {
-                      position_name: filter.position,
-                    },
-                  },
-                }
-              : undefined,*/,
+            },
             PlayerClub: filter.position
               ? {
                   some: {

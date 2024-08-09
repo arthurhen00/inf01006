@@ -54,8 +54,16 @@ export interface Player {
   PlayerStats: PlayerStats[]
 }
 
-export async function getCards(filters: CardsFiltersSchema) {
-  const response = await api.post('/players/filtered', {
+export interface PlayerData {
+  items: number
+  page: number
+  pages: number
+  current_page: number
+  data: Player[]
+}
+
+export async function getCards(filters: CardsFiltersSchema, page: number) {
+  const response = await api.post(`/players/filtered?page=${page}`, {
     name: filters.player_name,
     min_overall: filters.min_overall,
     max_overall: filters.max_overall,

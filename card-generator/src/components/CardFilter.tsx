@@ -1,4 +1,4 @@
-import { getNations, getYears, getPositions, CardsFiltersSchema, cardsFiltersSchema, getCards, Player } from '@/data'
+import { getNations, getYears, getPositions, CardsFiltersSchema, cardsFiltersSchema } from '@/data'
 import { Button, Input, Label, Separator } from './ui'
 import { StatsPopover, StringSelect } from '.'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Search } from 'lucide-react'
 
 interface props {
-  onFilter: React.Dispatch<React.SetStateAction<Player[] | never[]>>
+  onFilter: React.Dispatch<React.SetStateAction<CardsFiltersSchema>>
 }
 
 export function CardFilter({ onFilter }: props) {
@@ -15,8 +15,7 @@ export function CardFilter({ onFilter }: props) {
   })
 
   async function handleFilterCards(data: CardsFiltersSchema) {
-    const cards = await getCards(data)
-    onFilter(cards)
+    onFilter(data)
   }
 
   return (

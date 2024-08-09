@@ -1,8 +1,8 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common'
+import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common'
 import { GetPlayerUseCase, GetPlayersUseCase, GetFilteredPlayersUseCase } from './use-cases'
-import { GetFilteredPlayersRequest, GetPlayerRequest } from './requests'
-import { GetPlayerResponse } from './responses'
-import { validate, validateOrReject } from 'class-validator'
+import { GetFilteredPlayersRequest, GetPaginationRequest, GetPlayerRequest } from './requests'
+import { GetPaginatedResponse, GetPlayerResponse } from './responses'
+import { validate } from 'class-validator'
 import { plainToClass } from 'class-transformer'
 
 @Controller()
@@ -26,7 +26,7 @@ export class PlayerController {
   }
 
   @Post('players/filtered')
-  async getFilteredPlayers(@Body() body: GetFilteredPlayersRequest) {
+  async getFilteredPlayers(@Body() body: GetFilteredPlayersRequest, @Query() { page }: GetPaginationRequest) {
     const getFilteredPlayersRequest = plainToClass(GetFilteredPlayersRequest, body)
 
     validate(getFilteredPlayersRequest).then((errors) => {
@@ -38,6 +38,7 @@ export class PlayerController {
     })
 
     const players = await this.getFilteredPlayersUseCase.exec(body)
-    return GetPlayerResponse.fromArray(players)
+
+    return GetPaginatedResponse.fromArray(players, parseInt(page))
   }
 }
