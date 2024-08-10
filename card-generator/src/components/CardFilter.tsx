@@ -1,125 +1,21 @@
-import { YearSelect } from './YearSelect'
-import { Button } from './ui/button'
-import { Input } from './ui/input'
-import { Label } from './ui/label'
-import { Separator } from './ui/separator'
+import { getNations, getYears, getPositions, CardsFiltersSchema, cardsFiltersSchema } from '@/data'
+import { Button, Input, Label, Separator } from './ui'
+import { StatsPopover, StringSelect } from '.'
 import { FormProvider, useForm } from 'react-hook-form'
-import { StatsPopover } from './StatsPopover'
-import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useSearchParams } from 'react-router-dom'
 import { Search } from 'lucide-react'
-import { CountrySelect } from './CountrySelect'
 
-const cardsFiltersSchema = z.object({
-  player_name: z.string(),
-  year: z.string(),
-  minOverall: z.coerce.string(),
-  maxOverall: z.coerce.string(),
-  minPotential: z.coerce.string(),
-  maxPotential: z.coerce.string(),
-  foot: z.string(),
-  country: z.string(),
-})
-export type CardsFiltersSchema = z.infer<typeof cardsFiltersSchema>
+interface props {
+  onFilter: React.Dispatch<React.SetStateAction<CardsFiltersSchema>>
+}
 
-export function CardFilter() {
-  const [searchParams, setSearchParams] = useSearchParams()
-
+export function CardFilter({ onFilter }: props) {
   const methods = useForm<CardsFiltersSchema>({
     resolver: zodResolver(cardsFiltersSchema),
-    defaultValues: {
-      year: 'any',
-      minOverall: '',
-      maxOverall: '',
-      minPotential: '',
-      maxPotential: '',
-      foot: 'any',
-      country: 'any',
-    },
   })
 
-  function handleFilterCards(data: CardsFiltersSchema) {
-    console.log(data, searchParams)
-    setSearchParams((state) => {
-      if (data.player_name) {
-        state.set('player_name', data.player_name)
-      } else {
-        state.delete('player_name')
-      }
-
-      return state
-    })
-
-    setSearchParams((state) => {
-      if (data.year) {
-        state.set('year', data.year)
-      } else {
-        state.delete('year')
-      }
-
-      return state
-    })
-
-    setSearchParams((state) => {
-      if (data.minOverall) {
-        state.set('minOverall', data.minOverall)
-      } else {
-        state.delete('minOverall')
-      }
-
-      return state
-    })
-
-    setSearchParams((state) => {
-      if (data.maxOverall) {
-        state.set('maxOverall', data.maxOverall)
-      } else {
-        state.delete('maxOverall')
-      }
-
-      return state
-    })
-
-    setSearchParams((state) => {
-      if (data.minPotential) {
-        state.set('minPotential', data.minPotential)
-      } else {
-        state.delete('minPotential')
-      }
-
-      return state
-    })
-
-    setSearchParams((state) => {
-      if (data.foot) {
-        state.set('foot', data.foot)
-      } else {
-        state.delete('foot')
-      }
-
-      return state
-    })
-
-    setSearchParams((state) => {
-      if (data.maxPotential) {
-        state.set('maxPotential', data.maxPotential)
-      } else {
-        state.delete('maxPotential')
-      }
-
-      return state
-    })
-
-    setSearchParams((state) => {
-      if (data.country) {
-        state.set('country', data.country)
-      } else {
-        state.delete('country')
-      }
-
-      return state
-    })
+  async function handleFilterCards(data: CardsFiltersSchema) {
+    onFilter(data)
   }
 
   return (
@@ -140,14 +36,18 @@ export function CardFilter() {
         </div>
         <div className="flex items-center justify-between gap-x-2">
           <Label>Card year</Label>
-          <YearSelect control={methods.control} />
+          <StringSelect control={methods.control} name={'year'} fetchData={getYears} />
         </div>
         <div className="flex items-center justify-between gap-x-2">
           <Label>Player nation</Label>
-          <CountrySelect control={methods.control} />
+          <StringSelect control={methods.control} name={'nation'} fetchData={getNations} />
+        </div>
+        <div className="flex items-center justify-between gap-x-2">
+          <Label>Player position</Label>
+          <StringSelect control={methods.control} name={'position'} fetchData={getPositions} />
         </div>
         <Separator className="bg-fst-200" />
-        <Button className="text-snd-100 border-snd-300 bg-fst-800 self-end border-[1px]">
+        <Button className="self-end border-[1px] border-snd-300 bg-fst-800 text-snd-100">
           Procurar
           <Search className="ml-2 h-4 w-4" />
         </Button>
