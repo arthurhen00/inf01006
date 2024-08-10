@@ -1,15 +1,16 @@
 from columns import *
 from positions import positions_dict
-from traits import traits_dict
-from leagues import leagues_dict
-from tags import tags_dict
-from clubs import clubs_dict
+#from traits import traits_dict
+#from leagues import leagues_dict
+#from tags import tags_dict
+#from clubs import clubs_dict
 def create_player(col):
     obj = {}
     obj['sofifa_id'] = col[SOFIFA_ID]
     obj['player_url'] = col[PLAYER_URL]
     obj['short_name'] = col[SHORT_NAME]
     obj['long_name'] = col[LONG_NAME]
+    obj['nationality_id'] = col[NATIONALITY_ID]
 
     return obj
 
@@ -57,12 +58,13 @@ def create_player_position(col,year,position_id):
 
     return obj
 
-def create_player_traits(col,year):
+def create_player_traits(col,year, traits):
     objs = []
-    traits = map(lambda x: x.strip(), col[PLAYER_TRAITS].split(','))
-    for trait in traits:
+    player_traits = map(lambda x: x.strip(), col[PLAYER_TRAITS].split(','))
+    for trait in player_traits:
         if trait != '':
-            objs.append(create_player_trait(col,year,traits_dict[trait]))
+            trait_obj = traits[trait]
+            objs.append(create_player_trait(col,year,trait_obj['trait_id']))
     return objs
 
 def create_player_trait(col,year,trait_id):
@@ -88,23 +90,24 @@ def create_player_club(col,year):
 
     return obj
 
-def create_club(col):
+def create_club(col, league_id):
     obj = {}
     if col[LEAGUE_NAME] == '': return obj
-    obj['club_team_id'] = col[CLUB_TEAM_ID]
-    obj['nationality_id'] = col[NATIONALITY_ID]
+    obj['club_team_id'] = col[CLUB_TEAM_ID][:-2]
     obj['club_name'] = col[CLUB_NAME]
-    obj['league_id'] = leagues_dict[col[LEAGUE_NAME]]
+    obj['league_id'] = league_id
     obj['club_logo_url'] = col[CLUB_LOGO_URL]
+    obj['club_flag_url'] = col[CLUB_FLAG_URL]
 
     return obj
 
-def create_player_tags(col,year):
+def create_player_tags(col,year,tags):
     objs = []
-    tags = map(lambda x: x.strip(), col[PLAYER_TAGS].split(','))
-    for tag in tags:
+    player_tags = map(lambda x: x.strip(), col[PLAYER_TAGS].split(','))
+    for tag in player_tags:
         if tag != '':
-            objs.append(create_player_tag(col,year,tags_dict[tag]))
+            tag_obj = tags[tag]
+            objs.append(create_player_tag(col,year,tag_obj['tag_id']))
     return objs
 
 def create_player_tag(col,year, tag_id):
@@ -205,3 +208,44 @@ def create_player_stats(col,year):
     obj['gk'] = col[GK]
     obj['player_face_url'] = col[PLAYER_FACE_URL]
     return obj
+
+league_counter = 0
+def create_league(col):
+    global league_counter
+    obj = {}
+    obj['league_id'] = league_counter
+    league_counter += 1
+    obj['league_name'] = col[LEAGUE_NAME]       
+    obj['league_level'] = col[LEAGUE_LEVEL]   
+
+    return obj
+
+
+tag_counter = 0
+def create_tags(col):
+    global tag_counter
+    objs = []
+    tags = map(lambda x: x.strip(), col[PLAYER_TAGS].split(','))
+    for tag in tags:
+        if tag != '':
+            objs.append({
+                'tag_id' : tag_counter,
+                'name': tag
+            })
+            tag_counter += 1
+    return objs
+
+trait_counter = 0
+def create_traits(col):
+    global trait_counter
+    objs = []
+    traits = map(lambda x: x.strip(), col[PLAYER_TRAITS].split(','))
+    for trait in traits:
+        if trait != '':
+            objs.append({
+                'trait_id' : trait_counter,
+                'name': trait
+            })
+            
+            trait_counter += 1
+    return objs
