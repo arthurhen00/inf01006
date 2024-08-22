@@ -6,40 +6,40 @@ from positions import positions_dict
 #from clubs import clubs_dict
 def create_player(col):
     obj = {}
-    obj['sofifa_id'] = col[SOFIFA_ID]
-    obj['player_url'] = col[PLAYER_URL]
-    obj['short_name'] = col[SHORT_NAME]
-    obj['long_name'] = col[LONG_NAME]
-    obj['nationality_id'] = col[NATIONALITY_ID]
+    obj['sofifa_id'] = col[SOFIFA_ID] if col[SOFIFA_ID] != "" else None
+    obj['player_url'] = col[PLAYER_URL]  if col[PLAYER_URL] != "" else None
+    obj['short_name'] = col[SHORT_NAME]  if col[SHORT_NAME] != "" else None
+    obj['long_name'] = col[LONG_NAME]  if col[LONG_NAME] != "" else None
+    obj['nationality_id'] = col[NATIONALITY_ID] if col[NATIONALITY_ID] != "" else None
 
     return obj
 
 def create_player_nation(col):
     obj = {}
     if not col[NATION_TEAM_ID]: return obj
-    nation_team_id = int(col[NATION_TEAM_ID][:-2])
-    obj['sofifa_id'] = col[SOFIFA_ID]
+    nation_team_id = int(col[NATION_TEAM_ID][:-2]) if col[NATION_TEAM_ID] != "" else None
+    obj['sofifa_id'] = col[SOFIFA_ID] if col[SOFIFA_ID] != "" else None 
     obj['nation_team_id'] = nation_team_id
-    obj['nation_position'] = col[NATION_POSITION]
-    obj['nation_jersey_number'] = col[NATION_JERSEY_NUMBER]
+    obj['nation_position'] = col[NATION_POSITION] if col[NATION_POSITION] != "" else None
+    obj['nation_jersey_number'] = col[NATION_JERSEY_NUMBER]  if col[NATION_JERSEY_NUMBER] != "" else None
 
-    return obj
+    return obj 
 
 def create_nation_team(col):
     obj = {}
     if not col[NATION_TEAM_ID]: return obj
-    nation_team_id = int(col[NATION_TEAM_ID][:-2])
+    nation_team_id = int(col[NATION_TEAM_ID][:-2]) if col[NATION_TEAM_ID] != "" else None
     obj['nation_team_id'] = nation_team_id
-    obj['nationality_id'] = col[NATIONALITY_ID]
-    obj['nation_logo_url'] = col[NATION_LOGO_URL]
+    obj['nationality_id'] = col[NATIONALITY_ID] if col[NATIONALITY_ID] != "" else None
+    obj['nation_logo_url'] = col[NATION_LOGO_URL]  if col[NATION_LOGO_URL] != "" else None
 
     return obj
 
 def create_nation(col):
     obj = {}
-    obj['nationality_id'] = col[NATIONALITY_ID]
-    obj['nationality_name'] = col[NATIONALITY_NAME]
-    obj['nation_flag_url'] = col[NATION_FLAG_URL]
+    obj['nationality_id'] = col[NATIONALITY_ID] if col[NATIONALITY_ID] != "" else None
+    obj['nationality_name'] = col[NATIONALITY_NAME] if col[NATIONALITY_NAME] != "" else None
+    obj['nation_flag_url'] = col[NATION_FLAG_URL] if col[NATION_FLAG_URL] != "" else None
 
     return obj
 
@@ -53,7 +53,7 @@ def create_player_positions(col,year):
 def create_player_position(col,year,position_id):
     obj = {}
     obj['year'] = year
-    obj['sofifa_id'] = col[SOFIFA_ID]
+    obj['sofifa_id'] = col[SOFIFA_ID] if col[SOFIFA_ID] != "" else None
     obj['position_id'] = position_id
 
     return obj
@@ -70,7 +70,7 @@ def create_player_traits(col,year, traits):
 def create_player_trait(col,year,trait_id):
     obj = {}
     obj['year'] = year
-    obj['sofifa_id'] = col[SOFIFA_ID]
+    obj['sofifa_id'] = col[SOFIFA_ID] if col[SOFIFA_ID] != "" else None
     obj['trait_id'] = trait_id
 
     return obj
@@ -79,25 +79,25 @@ def create_player_club(col,year):
     obj = {}
     if col[CLUB_TEAM_ID] == '': return obj
     obj['year'] = year
-    obj['sofifa_id'] = col[SOFIFA_ID]
-    obj['club_team_id'] = col[CLUB_TEAM_ID][-2]
-    obj['club_position'] = col[CLUB_POSITION]
-    obj['club_jersey_number'] = col[CLUB_JERSEY_NUMBER]
-    obj['club_joined'] = col[CLUB_JOINED]
-    obj['club_contract_valid_until'] = col[CLUB_CONTRACT_VALID_UNTIL]
-    obj['release_clause_eur'] = col[RELEASE_CLAUSE_EUR]
-    obj['club_loaned_from'] = col[CLUB_LOANED_FROM]
+    obj['sofifa_id'] = col[SOFIFA_ID] if col[SOFIFA_ID] != "" else None
+    obj['club_team_id'] = col[CLUB_TEAM_ID][-2] if col[CLUB_TEAM_ID] != "" else None
+    obj['club_position'] = col[CLUB_POSITION] if col[CLUB_POSITION] != "" else None
+    obj['club_jersey_number'] = col[CLUB_JERSEY_NUMBER] if col[CLUB_JERSEY_NUMBER] != "" else None
+    obj['club_joined'] = col[CLUB_JOINED]  if col[CLUB_JOINED] != "" else None
+    obj['club_contract_valid_until'] = col[CLUB_CONTRACT_VALID_UNTIL] if col[CLUB_CONTRACT_VALID_UNTIL] != "" else None
+    obj['release_clause_eur'] = col[RELEASE_CLAUSE_EUR] if col[RELEASE_CLAUSE_EUR] != "" else None
+    obj['club_loaned_from'] = col[CLUB_LOANED_FROM] if col[CLUB_LOANED_FROM] != "" else None
 
     return obj
 
 def create_club(col, league_id):
     obj = {}
     if col[LEAGUE_NAME] == '': return obj
-    obj['club_team_id'] = col[CLUB_TEAM_ID][:-2]
-    obj['club_name'] = col[CLUB_NAME]
-    obj['league_id'] = league_id
-    obj['club_logo_url'] = col[CLUB_LOGO_URL]
-    obj['club_flag_url'] = col[CLUB_FLAG_URL]
+    obj['club_team_id'] = col[CLUB_TEAM_ID][:-2] if col[CLUB_TEAM_ID] != "" else None
+    obj['club_name'] = col[CLUB_NAME] if col[CLUB_NAME] != "" else None
+    obj['league_id'] = league_id if league_id != "" else None
+    obj['club_logo_url'] = col[CLUB_LOGO_URL] if col[CLUB_LOGO_URL] != "" else None
+    obj['club_flag_url'] = col[CLUB_FLAG_URL] if col[CLUB_FLAG_URL] != "" else None
 
     return obj
 
@@ -113,100 +113,100 @@ def create_player_tags(col,year,tags):
 def create_player_tag(col,year, tag_id):
     obj = {}
     obj['year'] = year
-    obj['sofifa_id'] = col[SOFIFA_ID]
+    obj['sofifa_id'] = col[SOFIFA_ID] if col[SOFIFA_ID] != "" else None
     obj['tag_id'] = tag_id
 
     return obj
 
 def create_player_stats(col,year):
     obj = {}
-    obj['sofifa_id'] = col[SOFIFA_ID] 
+    obj['sofifa_id'] = col[SOFIFA_ID]  if col[SOFIFA_ID] != "" else None
     obj['year'] = year       
-    obj['overall'] = col[OVERALL]                      
-    obj['potential'] = col[POTENTIAL]                    
-    obj['value_eur'] = col[VALUE_EUR]                       
-    obj['wage_eur'] = col[WAGE_EUR]                        
-    obj['age'] = col[AGE]                          
-    obj['dob'] = col[DOB]                             
-    obj['height_cm'] = col[HEIGHT_CM]                    
-    obj['weight_kg'] = col[WEIGHT_KG]                    
-    obj['club_name'] = col[CLUB_NAME]                       
-    obj['preferred_foot'] = col[PREFERRED_FOOT]                  
-    obj['weak_foot'] = col[WEAK_FOOT]                    
-    obj['skill_moves'] = col[SKILL_MOVES]                  
-    obj['international_reputation'] = col[INTERNATIONAL_REPUTATION]     
-    obj['work_rate'] = col[WORK_RATE]                       
-    obj['body_type'] = col[BODY_TYPE]                       
-    obj['real_face'] = col[REAL_FACE]                    
-    obj['pace'] = col[PACE]                         
-    obj['shooting'] = col[SHOOTING]                     
-    obj['passing'] = col[PASSING]                      
-    obj['dribbling'] = col[DRIBBLING]                    
-    obj['defending'] = col[DEFENDING]                    
-    obj['physic'] = col[PHYSIC]                       
-    obj['attacking_crossing'] = col[ATTACKING_CROSSING]           
-    obj['attacking_finishing'] = col[ATTACKING_FINISHING]          
-    obj['attacking_heading_accuracy'] = col[ATTACKING_HEADING_ACCURACY]   
-    obj['attacking_short_passing'] = col[ATTACKING_SHORT_PASSING]      
-    obj['attacking_volleys'] = col[ATTACKING_VOLLEYS]            
-    obj['skill_dribbling'] = col[SKILL_DRIBBLING]              
-    obj['skill_curve'] = col[SKILL_CURVE]                  
-    obj['skill_fk_accuracy'] = col[SKILL_FK_ACCURACY]            
-    obj['skill_long_passing'] = col[SKILL_LONG_PASSING]           
-    obj['skill_ball_control'] = col[SKILL_BALL_CONTROL]           
-    obj['movement_acceleration'] = col[MOVEMENT_ACCELERATION]        
-    obj['movement_sprint_speed'] = col[MOVEMENT_SPRINT_SPEED]        
-    obj['movement_agility'] = col[MOVEMENT_AGILITY]             
-    obj['movement_reactions'] = col[MOVEMENT_REACTIONS]           
-    obj['movement_balance'] = col[MOVEMENT_BALANCE]             
-    obj['power_shot_power'] = col[POWER_SHOT_POWER]             
-    obj['power_jumping'] = col[POWER_JUMPING]                
-    obj['power_stamina'] = col[POWER_STAMINA]                
-    obj['power_strength'] = col[POWER_STRENGTH]               
-    obj['power_long_shots'] = col[POWER_LONG_SHOTS]             
-    obj['mentality_aggression'] = col[MENTALITY_AGGRESSION]         
-    obj['mentality_interceptions'] = col[MENTALITY_INTERCEPTIONS]      
-    obj['mentality_positioning'] = col[MENTALITY_POSITIONING]        
-    obj['mentality_vision'] = col[MENTALITY_VISION]             
-    obj['mentality_penalties'] = col[MENTALITY_PENALTIES]          
-    obj['mentality_composure'] = col[MENTALITY_COMPOSURE]          
-    obj['defending_marking_awareness'] = col[DEFENDING_MARKING_AWARENESS]  
-    obj['defending_standing_tackle'] = col[DEFENDING_STANDING_TACKLE]    
-    obj['defending_sliding_tackle'] = col[DEFENDING_SLIDING_TACKLE]     
-    obj['goalkeeping_diving'] = col[GOALKEEPING_DIVING]           
-    obj['goalkeeping_handling'] = col[GOALKEEPING_HANDLING]         
-    obj['goalkeeping_kicking'] = col[GOALKEEPING_KICKING]          
-    obj['goalkeeping_positioning'] = col[GOALKEEPING_POSITIONING]      
-    obj['goalkeeping_reflexes'] = col[GOALKEEPING_REFLEXES]         
-    obj['goalkeeping_speed'] = col[GOALKEEPING_SPEED]            
-    obj['ls'] = col[LS]                              
-    obj['st'] = col[ST]                              
-    obj['rs'] = col[RS]                              
-    obj['lw'] = col[LW]                              
-    obj['lf'] = col[LF]                              
-    obj['cf'] = col[CF]                              
-    obj['rf'] = col[RF]                              
-    obj['rw'] = col[RW]                              
-    obj['lam'] = col[LAM]
-    obj['cam'] = col[CAM]
-    obj['ram'] = col[RAM]
-    obj['lm'] = col[LM]
-    obj['lcm'] = col[LCM]
-    obj['cm'] = col[CM]
-    obj['rcm'] = col[RCM]
-    obj['rm'] = col[RM]
-    obj['lwb'] = col[LWB]
-    obj['ldm'] = col[LDM]
-    obj['cdm'] = col[CDM]
-    obj['rdm'] = col[RDM]
-    obj['rwb'] = col[RWB]
-    obj['lb'] = col[LB]
-    obj['lcb'] = col[LCB]
-    obj['cb'] = col[CB]
-    obj['rcb'] = col[RCB]
-    obj['rb'] = col[RB]
-    obj['gk'] = col[GK]
-    obj['player_face_url'] = col[PLAYER_FACE_URL]
+    obj['overall'] = col[OVERALL] if col[OVERALL] != "" else None
+    obj['potential'] = col[POTENTIAL] if col[POTENTIAL] != "" else None
+    obj['value_eur'] = col[VALUE_EUR] if col[VALUE_EUR] != "" else None
+    obj['wage_eur'] = col[WAGE_EUR]   if col[WAGE_EUR] != "" else None
+    obj['age'] = col[AGE]  if col[AGE] != "" else None
+    obj['dob'] = col[DOB]if col[DOB] != "" else None
+    obj['height_cm'] = col[HEIGHT_CM] if col[HEIGHT_CM] != "" else None
+    obj['weight_kg'] = col[WEIGHT_KG] if col[WEIGHT_KG] != "" else None
+    obj['club_name'] = col[CLUB_NAME]  if col[CLUB_NAME] != "" else None
+    obj['preferred_foot'] = col[PREFERRED_FOOT] if col[PREFERRED_FOOT] != "" else None
+    obj['weak_foot'] = col[WEAK_FOOT] if col[WEAK_FOOT] != "" else None
+    obj['skill_moves'] = col[SKILL_MOVES] if col[SKILL_MOVES] != "" else None
+    obj['international_reputation'] = col[INTERNATIONAL_REPUTATION]   if col[INTERNATIONAL_REPUTATION] != "" else None
+    obj['work_rate'] = col[WORK_RATE]  if col[WORK_RATE] != "" else None
+    obj['body_type'] = col[BODY_TYPE]  if col[BODY_TYPE] != "" else None
+    obj['real_face'] = col[REAL_FACE] if col[REAL_FACE] != "" else None
+    obj['pace'] = col[PACE] if col[PACE] != "" else None
+    obj['shooting'] = col[SHOOTING]  if col[SHOOTING] != "" else None
+    obj['passing'] = col[PASSING] if col[PASSING] != "" else None
+    obj['dribbling'] = col[DRIBBLING] if col[DRIBBLING] != "" else None
+    obj['defending'] = col[DEFENDING] if col[DEFENDING] != "" else None
+    obj['physic'] = col[PHYSIC]  if col[PHYSIC] != "" else None
+    obj['attacking_crossing'] = col[ATTACKING_CROSSING] if col[ATTACKING_CROSSING] != "" else None
+    obj['attacking_finishing'] = col[ATTACKING_FINISHING] if col[ATTACKING_FINISHING] != "" else None
+    obj['attacking_heading_accuracy'] = col[ATTACKING_HEADING_ACCURACY] if col[ATTACKING_HEADING_ACCURACY] != "" else None
+    obj['attacking_short_passing'] = col[ATTACKING_SHORT_PASSING]    if col[ATTACKING_SHORT_PASSING] != "" else None
+    obj['attacking_volleys'] = col[ATTACKING_VOLLEYS] if col[ATTACKING_VOLLEYS] != "" else None
+    obj['skill_dribbling'] = col[SKILL_DRIBBLING]   if col[SKILL_DRIBBLING] != "" else None
+    obj['skill_curve'] = col[SKILL_CURVE] if col[SKILL_CURVE] != "" else None
+    obj['skill_fk_accuracy'] = col[SKILL_FK_ACCURACY] if col[SKILL_FK_ACCURACY] != "" else None
+    obj['skill_long_passing'] = col[SKILL_LONG_PASSING] if col[SKILL_LONG_PASSING] != "" else None
+    obj['skill_ball_control'] = col[SKILL_BALL_CONTROL] if col[SKILL_BALL_CONTROL] != "" else None
+    obj['movement_acceleration'] = col[MOVEMENT_ACCELERATION] if col[MOVEMENT_ACCELERATION] != "" else None
+    obj['movement_sprint_speed'] = col[MOVEMENT_SPRINT_SPEED] if col[MOVEMENT_SPRINT_SPEED] != "" else None
+    obj['movement_agility'] = col[MOVEMENT_AGILITY]  if col[MOVEMENT_AGILITY] != "" else None
+    obj['movement_reactions'] = col[MOVEMENT_REACTIONS] if col[MOVEMENT_REACTIONS] != "" else None
+    obj['movement_balance'] = col[MOVEMENT_BALANCE]  if col[MOVEMENT_BALANCE] != "" else None
+    obj['power_shot_power'] = col[POWER_SHOT_POWER]  if col[POWER_SHOT_POWER] != "" else None
+    obj['power_jumping'] = col[POWER_JUMPING]     if col[POWER_JUMPING] != "" else None
+    obj['power_stamina'] = col[POWER_STAMINA]     if col[POWER_STAMINA] != "" else None
+    obj['power_strength'] = col[POWER_STRENGTH]    if col[POWER_STRENGTH] != "" else None
+    obj['power_long_shots'] = col[POWER_LONG_SHOTS]  if col[POWER_LONG_SHOTS] != "" else None
+    obj['mentality_aggression'] = col[MENTALITY_AGGRESSION]  if col[MENTALITY_AGGRESSION] != "" else None
+    obj['mentality_interceptions'] = col[MENTALITY_INTERCEPTIONS]    if col[MENTALITY_INTERCEPTIONS] != "" else None
+    obj['mentality_positioning'] = col[MENTALITY_POSITIONING] if col[MENTALITY_POSITIONING] != "" else None
+    obj['mentality_vision'] = col[MENTALITY_VISION]  if col[MENTALITY_VISION] != "" else None
+    obj['mentality_penalties'] = col[MENTALITY_PENALTIES]   if col[MENTALITY_PENALTIES] != "" else None
+    obj['mentality_composure'] = col[MENTALITY_COMPOSURE]   if col[MENTALITY_COMPOSURE] != "" else None
+    obj['defending_marking_awareness'] = col[DEFENDING_MARKING_AWARENESS]   if col[DEFENDING_MARKING_AWARENESS] != "" else None
+    obj['defending_standing_tackle'] = col[DEFENDING_STANDING_TACKLE]  if col[DEFENDING_STANDING_TACKLE] != "" else None
+    obj['defending_sliding_tackle'] = col[DEFENDING_SLIDING_TACKLE]   if col[DEFENDING_SLIDING_TACKLE] != "" else None
+    obj['goalkeeping_diving'] = col[GOALKEEPING_DIVING] if col[GOALKEEPING_DIVING] != "" else None
+    obj['goalkeeping_handling'] = col[GOALKEEPING_HANDLING]  if col[GOALKEEPING_HANDLING] != "" else None
+    obj['goalkeeping_kicking'] = col[GOALKEEPING_KICKING]   if col[GOALKEEPING_KICKING] != "" else None
+    obj['goalkeeping_positioning'] = col[GOALKEEPING_POSITIONING]    if col[GOALKEEPING_POSITIONING] != "" else None
+    obj['goalkeeping_reflexes'] = col[GOALKEEPING_REFLEXES]  if col[GOALKEEPING_REFLEXES] != "" else None
+    obj['goalkeeping_speed'] = col[GOALKEEPING_SPEED] if col[GOALKEEPING_SPEED] != "" else None
+    obj['ls'] = col[LS] if col[LS] != "" else None
+    obj['st'] = col[ST] if col[ST] != "" else None
+    obj['rs'] = col[RS] if col[RS] != "" else None
+    obj['lw'] = col[LW] if col[LW] != "" else None
+    obj['lf'] = col[LF] if col[LF] != "" else None
+    obj['cf'] = col[CF] if col[CF] != "" else None
+    obj['rf'] = col[RF] if col[RF] != "" else None
+    obj['rw'] = col[RW] if col[RW] != "" else None
+    obj['lam'] = col[LAM] if col[LAM] != "" else None
+    obj['cam'] = col[CAM] if col[CAM] != "" else None
+    obj['ram'] = col[RAM] if col[RAM] != "" else None
+    obj['lm'] = col[LM] if col[LM] != "" else None
+    obj['lcm'] = col[LCM] if col[LCM] != "" else None
+    obj['cm'] = col[CM] if col[CM] != "" else None
+    obj['rcm'] = col[RCM] if col[RCM] != "" else None
+    obj['rm'] = col[RM] if col[RM] != "" else None
+    obj['lwb'] = col[LWB] if col[LWB] != "" else None
+    obj['ldm'] = col[LDM] if col[LDM] != "" else None
+    obj['cdm'] = col[CDM] if col[CDM] != "" else None
+    obj['rdm'] = col[RDM] if col[RDM] != "" else None
+    obj['rwb'] = col[RWB] if col[RWB] != "" else None
+    obj['lb'] = col[LB] if col[LB] != "" else None
+    obj['lcb'] = col[LCB] if col[LCB] != "" else None
+    obj['cb'] = col[CB] if col[CB] != "" else None
+    obj['rcb'] = col[RCB] if col[RCB] != "" else None
+    obj['rb'] = col[RB] if col[RB] != "" else None
+    obj['gk'] = col[GK] if col[GK] != "" else None
+    obj['player_face_url'] = col[PLAYER_FACE_URL] if col[PLAYER_FACE_URL] != "" else None
     return obj
 
 league_counter = 0
@@ -215,8 +215,8 @@ def create_league(col):
     obj = {}
     obj['league_id'] = league_counter
     league_counter += 1
-    obj['league_name'] = col[LEAGUE_NAME]       
-    obj['league_level'] = col[LEAGUE_LEVEL]   
+    obj['league_name'] = col[LEAGUE_NAME]     if col[LEAGUE_NAME] != "" else None
+    obj['league_level'] = col[LEAGUE_LEVEL] if col[LEAGUE_LEVEL] != "" else None
 
     return obj
 

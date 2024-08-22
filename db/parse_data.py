@@ -72,7 +72,7 @@ for filename in filenames:
 
             player_nation = create_player_nation(col)
             if player_nation != {} and player_nation['sofifa_id'] not in player_nations:
-                player_nation[player_nation['sofifa_id']] = player_nation
+                player_nations[player_nation['sofifa_id']] = player_nation
                     
 import sys
 
