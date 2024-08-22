@@ -230,7 +230,7 @@ def create_tags(col):
         if tag != '':
             objs.append({
                 'tag_id' : tag_counter,
-                'name': tag
+                'tag_name': tag
             })
             tag_counter += 1
     return objs
@@ -244,7 +244,7 @@ def create_traits(col):
         if trait != '':
             objs.append({
                 'trait_id' : trait_counter,
-                'name': trait
+                'trait_name': trait
             })
             
             trait_counter += 1

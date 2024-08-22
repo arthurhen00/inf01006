@@ -58,13 +58,13 @@ for filename in filenames:
             
             tag_array = create_tags(col)
             for tag in tag_array:
-                if tag['name'] not in tags:
-                    tags[tag['name']] = tag
+                if tag['tag_name'] not in tags:
+                    tags[tag['tag_name']] = tag
  
             trait_array = create_traits(col)
             for trait in trait_array:
-                if trait['name'] not in traits:
-                    traits[trait['name']] = trait
+                if trait['trait_name'] not in traits:
+                    traits[trait['trait_name']] = trait
 
             player = create_player(col)
             if player != {} and player['sofifa_id'] not in players:

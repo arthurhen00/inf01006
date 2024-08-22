@@ -31,7 +31,7 @@ model PlayerStats {
   dob                         String?
   height_cm                   Int?
   weight_kg                   Int?
-  club_name                   Int?
+  club_name                   String?
   preferred_foot              String?
   weak_foot                   Int?
   skill_moves                 Int?
@@ -195,8 +195,8 @@ model PlayerClub {
   club_team_id              Int
   club_position             String
   club_jersey_number        Int
-  club_joined               DateTime @default(now())
-  club_contract_valid_until DateTime @default(now())
+  club_joined               String // DateTime @default(now())
+  club_contract_valid_until String // DateTime @default(now())
   release_clause_eur        Float?
   club_loaned_from          String?
 
