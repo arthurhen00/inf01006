@@ -204,7 +204,7 @@ def create_db():
             club_team_id INTEGER NOT NULL,
             club_position TEXT,
             club_jersey_number INTEGER,
-            club_joined DATE NOT NULL,
+            club_joined DATE,
             club_contract_valid_until DATE NOT NULL,
             release_clause_eur REAL,
             club_loaned_from TEXT,

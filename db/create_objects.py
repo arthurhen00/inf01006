@@ -80,7 +80,7 @@ def create_player_club(col,year):
     if col[CLUB_TEAM_ID] == '': return obj
     obj['year'] = year
     obj['sofifa_id'] = col[SOFIFA_ID] if col[SOFIFA_ID] != "" else None
-    obj['club_team_id'] = col[CLUB_TEAM_ID][-2] if col[CLUB_TEAM_ID] != "" else None
+    obj['club_team_id'] = col[CLUB_TEAM_ID] if col[CLUB_TEAM_ID] != "" else None
     obj['club_position'] = col[CLUB_POSITION] if col[CLUB_POSITION] != "" else None
     obj['club_jersey_number'] = col[CLUB_JERSEY_NUMBER] if col[CLUB_JERSEY_NUMBER] != "" else None
     obj['club_joined'] = col[CLUB_JOINED]  if col[CLUB_JOINED] != "" else None
@@ -98,6 +98,7 @@ def create_club(col, league_id):
     obj['league_id'] = league_id if league_id != "" else None
     obj['club_logo_url'] = col[CLUB_LOGO_URL] if col[CLUB_LOGO_URL] != "" else None
     obj['club_flag_url'] = col[CLUB_FLAG_URL] if col[CLUB_FLAG_URL] != "" else None
+    obj['nationality_id'] = 1
 
     return obj
 

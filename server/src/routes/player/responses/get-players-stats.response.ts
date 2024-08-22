@@ -13,6 +13,7 @@ export class GetPlayerStatsResponse {
   PlayerTags: string[]
   PlayerTraits: string[]
   PlayerClub: object
+  player_face_url: string
 
   constructor(PlayerStatsObj) {
     this.year = PlayerStatsObj.year
@@ -27,6 +28,7 @@ export class GetPlayerStatsResponse {
     this.PlayerTags = this.extractPlayerTags(PlayerStatsObj.PlayerTags)
     this.PlayerTraits = this.extractPlayerTraits(PlayerStatsObj.PlayerTraits)
     this.PlayerClub = GetPlayerClubResponse.fromArray(PlayerStatsObj.PlayerClub)
+    this.player_face_url = PlayerStatsObj.player_face_url
   }
 
   private extractPositionNames(playerPositions: any[]): string[] {

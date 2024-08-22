@@ -19,15 +19,12 @@ export function Card(player: Player) {
                   <div className="flex flex-col items-center font-bold text-white">
                     <div>{yearData.overall ?? 0}</div>
                     <div className="mb-1">{clubData.club_position ?? 'N/A'}</div>
-                    <img
-                      src={clubData.Club?.Nation?.nation_flag_url ?? 'default_flag_url.png'}
-                      className="mb-1 h-5 w-7"
-                    />
-                    <img src={clubData.Club?.club_logo_url ?? 'default_club_logo_url.png'} className="h-9 w-10" />
+                    <img src={player.Nation.nation_flag_url ?? 'default_flag_url.png'} className="mb-1 h-5 w-7" />
+                    <img src={clubData.Club.club_logo_url ?? 'default_club_logo_url.png'} className="h-9 w-10" />
                   </div>
                   <div className="relative flex items-end">
                     <p className="absolute ml-16">{yearData.year}</p>
-                    <img src="https://cdn.sofifa.net/players/158/023/22_120.png"></img>
+                    <img src={yearData.player_face_url}></img>
                   </div>
                 </div>
 

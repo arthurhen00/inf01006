@@ -102,6 +102,7 @@ export class PlayerRepository {
         },
       },
       include: playerInclude,
+      take: 5000, //
     })
 
     // TODO

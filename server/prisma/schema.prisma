@@ -139,7 +139,7 @@ model NationTeam {
 }
 
 model PlayerNation {
-  nation_position      Int
+  nation_position      String
   nation_jersey_number Int
   sofifa_id            Int
   nation_team_id       Int
@@ -182,10 +182,10 @@ model Club {
   club_logo_url  String
   club_flag_url  String
   league_id      Int
-  nationality_id Int
+  nationality_id Int?
 
   League     League       @relation(fields: [league_id], references: [league_id])
-  Nation     Nation       @relation(fields: [nationality_id], references: [nationality_id])
+  Nation     Nation?      @relation(fields: [nationality_id], references: [nationality_id])
   PlayerClub PlayerClub[]
 }
 
@@ -195,8 +195,8 @@ model PlayerClub {
   club_team_id              Int
   club_position             String
   club_jersey_number        Int
-  club_joined               String // DateTime @default(now())
-  club_contract_valid_until String // DateTime @default(now())
+  club_joined               String? // DateTime @default(now())
+  club_contract_valid_until DateTime @default(now())
   release_clause_eur        Float?
   club_loaned_from          String?
 

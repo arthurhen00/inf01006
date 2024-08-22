@@ -43,6 +43,7 @@ interface PlayerStats {
   PlayerTags: string[]
   PlayerTraits: string[]
   PlayerClub: PlayerClub[]
+  player_face_url: string
 }
 
 export interface Player {
