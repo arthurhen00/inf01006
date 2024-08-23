@@ -4,6 +4,7 @@ import { StatsPopover, StringSelect } from '.'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Search } from 'lucide-react'
+import { useSearchParams } from 'react-router-dom'
 
 interface props {
   onFilter: React.Dispatch<React.SetStateAction<CardsFiltersSchema>>
@@ -14,7 +15,11 @@ export function CardFilter({ onFilter }: props) {
     resolver: zodResolver(cardsFiltersSchema),
   })
 
+  const [searchParams, setSearchParams] = useSearchParams()
+
   async function handleFilterCards(data: CardsFiltersSchema) {
+    searchParams.set('page', '1')
+    setSearchParams(searchParams)
     onFilter(data)
   }
 
