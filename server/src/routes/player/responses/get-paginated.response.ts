@@ -1,6 +1,4 @@
-import { GetNationResponse } from '@src/routes/nation/responses'
 import { GetPlayerResponse } from './get-player.response'
-import { GetPlayerStatsResponse } from './get-players-stats.response'
 
 export class GetPaginatedResponse {
   items: number
@@ -17,17 +15,18 @@ export class GetPaginatedResponse {
     this.data = data
   }
 
-  static fromArray(Player: any[], page: number = 1): GetPaginatedResponse {
+  static fromArray(Player: any[], page: number = 1, totalItems): GetPaginatedResponse {
     const itemsPerPage = 100
     const startIndex = (page - 1) * itemsPerPage
     const endIndex = startIndex + itemsPerPage
     const paginatedPlayers = Player.slice(startIndex, endIndex)
-    const totalItems = Player.length
     const totalPages = Math.ceil(totalItems / itemsPerPage)
     const currentPage = page
 
+    // old version data -> Player
+    // now prisma does the pagination
     const data = paginatedPlayers.map((response) => new GetPlayerResponse(response))
 
-    return new GetPaginatedResponse(totalItems, currentPage, totalPages, currentPage, data)
+    return new GetPaginatedResponse(totalItems, currentPage, totalPages, currentPage, Player)
   }
 }

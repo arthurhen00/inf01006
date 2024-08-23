@@ -55,7 +55,7 @@ export class PlayerRepository {
     })
   }
 
-  async findByFilters(filter: GetFilteredPlayersRequest) {
+  async findByFilters(filter: GetFilteredPlayersRequest, page: number, items: number) {
     const players = await prisma.player.findMany({
       where: {
         long_name: filter.name ? { contains: filter.name } : undefined,
@@ -102,7 +102,8 @@ export class PlayerRepository {
         },
       },
       include: playerInclude,
-      take: 5000, //
+      skip: (page - 1) * items,
+      take: items, //
     })
 
     // TODO
@@ -157,5 +158,9 @@ export class PlayerRepository {
     return await prisma.player.findMany({
       include: playerInclude,
     })
+  }
+
+  async getTotalPlayers() {
+    return await prisma.player.count()
   }
 }

@@ -1,5 +1,5 @@
 import { Body, Controller, Get, Param, Post, Query } from '@nestjs/common'
-import { GetPlayerUseCase, GetPlayersUseCase, GetFilteredPlayersUseCase } from './use-cases'
+import { GetPlayerUseCase, GetPlayersUseCase, GetFilteredPlayersUseCase, GetPlayersNumbersUseCase } from './use-cases'
 import { GetFilteredPlayersRequest, GetPaginationRequest, GetPlayerRequest } from './requests'
 import { GetPaginatedResponse, GetPlayerResponse } from './responses'
 import { validate } from 'class-validator'
@@ -11,6 +11,7 @@ export class PlayerController {
     private readonly getPlayerUseCase: GetPlayerUseCase,
     private readonly getPlayersUseCase: GetPlayersUseCase,
     private readonly getFilteredPlayersUseCase: GetFilteredPlayersUseCase,
+    private readonly getPlayersNumbersUseCase: GetPlayersNumbersUseCase,
   ) {}
 
   @Get('player/:id')
@@ -37,8 +38,11 @@ export class PlayerController {
       }
     })
 
-    const players = await this.getFilteredPlayersUseCase.exec(body)
+    const totalItems = await this.getPlayersNumbersUseCase.exec()
 
-    return GetPaginatedResponse.fromArray(players, parseInt(page))
+    const itemsPerPage = 100
+    const players = await this.getFilteredPlayersUseCase.exec(body, parseInt(page), itemsPerPage)
+
+    return GetPaginatedResponse.fromArray(players, parseInt(page), totalItems)
   }
 }

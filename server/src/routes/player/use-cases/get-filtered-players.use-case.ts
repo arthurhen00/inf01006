@@ -6,7 +6,7 @@ import { GetFilteredPlayersRequest } from '../requests'
 export class GetFilteredPlayersUseCase {
   constructor(private readonly playerRepository: PlayerRepository) {}
 
-  async exec(filter: GetFilteredPlayersRequest) {
-    return await this.playerRepository.findByFilters(filter)
+  async exec(filter: GetFilteredPlayersRequest, page: number, items: number) {
+    return await this.playerRepository.findByFilters(filter, page, items)
   }
 }
