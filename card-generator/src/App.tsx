@@ -5,6 +5,7 @@ import { CardsFiltersSchema, getCards, PlayerData } from './data'
 import { PaginationDemo } from './components/Pagination'
 import { useQuery } from '@tanstack/react-query'
 import { useSearchParams } from 'react-router-dom'
+import { LoadingSpinner } from './components/LoadingSpinner'
 
 export function App() {
   const [filters, setFilters] = useState<CardsFiltersSchema>({})
@@ -27,7 +28,9 @@ export function App() {
 
       <div className="m mx-auto ml-4 flex w-screen flex-col justify-between gap-y-2">
         <ScrollArea>
-          {!isLoading && (
+          {isLoading ? (
+            <LoadingSpinner />
+          ) : (
             <div className="flex flex-wrap justify-center gap-4">
               {playersResponse?.data.map((card, index) => <Card {...card} key={index} />)}
             </div>
