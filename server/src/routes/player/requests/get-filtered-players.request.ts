@@ -21,13 +21,13 @@ export class GetFilteredPlayersRequest {
   @IsNumber()
   @Min(0)
   @Max(100)
-  min_pac: number
+  min_pace: number
 
   @IsOptional()
   @IsNumber()
   @Min(0)
   @Max(100)
-  max_pac: number
+  max_pace: number
 
   @IsOptional()
   @IsNumber()

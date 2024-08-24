@@ -29,7 +29,7 @@ export class PlayerController {
   @Post('players/filtered')
   async getFilteredPlayers(@Body() body: GetFilteredPlayersRequest, @Query() { page }: GetPaginationRequest) {
     const getFilteredPlayersRequest = plainToClass(GetFilteredPlayersRequest, body)
-
+    console.log(getFilteredPlayersRequest)
     validate(getFilteredPlayersRequest).then((errors) => {
       if (errors.length > 0) {
         console.log('validation failed. errors: ', errors)
@@ -37,7 +37,6 @@ export class PlayerController {
         console.log('validation succeed')
       }
     })
-
     const totalItems = await this.getPlayersNumbersUseCase.exec()
 
     const itemsPerPage = 100

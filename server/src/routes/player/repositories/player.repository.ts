@@ -68,28 +68,28 @@ export class PlayerRepository {
               lte: filter.max_overall ?? undefined,
             },
             pace: {
-              gte: filter.min_pac ?? undefined,
-              lte: filter.min_pac ?? undefined,
+              gte: filter.min_pace ?? undefined,
+              lte: filter.max_pace ?? undefined,
             },
             dribbling: {
-              gte: filter.min_dri ?? undefined,
-              lte: filter.min_dri ?? undefined,
+              gte: filter.min_dribbling ?? undefined,
+              lte: filter.max_dribbling ?? undefined,
             },
             shooting: {
-              gte: filter.min_sho ?? undefined,
-              lte: filter.min_sho ?? undefined,
+              gte: filter.min_shooting ?? undefined,
+              lte: filter.max_shooting ?? undefined,
             },
             defending: {
-              gte: filter.min_def ?? undefined,
-              lte: filter.min_def ?? undefined,
+              gte: filter.min_defending ?? undefined,
+              lte: filter.max_defending ?? undefined,
             },
             passing: {
-              gte: filter.min_pas ?? undefined,
-              lte: filter.min_pas ?? undefined,
+              gte: filter.min_passing ?? undefined,
+              lte: filter.max_passing ?? undefined,
             },
             physic: {
-              gte: filter.min_phy ?? undefined,
-              lte: filter.min_phy ?? undefined,
+              gte: filter.min_physic ?? undefined,
+              lte: filter.max_physic ?? undefined,
             },
             PlayerClub: filter.position
               ? {
@@ -116,23 +116,33 @@ export class PlayerRepository {
           (filter.min_overall === null || filter.min_overall === undefined || stats.overall >= filter.min_overall) &&
           (filter.max_overall === null || filter.max_overall === undefined || stats.overall <= filter.max_overall)
         const paceMatches =
-          (filter.min_pac === null || filter.min_pac === undefined || stats.pace >= filter.min_pac) &&
-          (filter.max_pac === null || filter.max_pac === undefined || stats.pace <= filter.max_pac)
+          (filter.min_pace === null || filter.min_pace === undefined || stats.pace >= filter.min_pace) &&
+          (filter.max_pace === null || filter.max_pace === undefined || stats.pace <= filter.max_pace)
         const dribblingMatches =
-          (filter.min_dri === null || filter.min_dri === undefined || stats.dribbling >= filter.min_dri) &&
-          (filter.max_dri === null || filter.max_dri === undefined || stats.dribbling <= filter.max_dri)
+          (filter.min_dribbling === null ||
+            filter.min_dribbling === undefined ||
+            stats.dribbling >= filter.min_dribbling) &&
+          (filter.max_dribbling === null ||
+            filter.max_dribbling === undefined ||
+            stats.dribbling <= filter.max_dribbling)
         const shootingMatches =
-          (filter.min_sho === null || filter.min_sho === undefined || stats.shooting >= filter.min_sho) &&
-          (filter.max_sho === null || filter.max_sho === undefined || stats.shooting <= filter.max_sho)
+          (filter.min_shooting === null ||
+            filter.min_shooting === undefined ||
+            stats.shooting >= filter.min_shooting) &&
+          (filter.max_shooting === null || filter.max_shooting === undefined || stats.shooting <= filter.max_shooting)
         const defendingMatches =
-          (filter.min_def === null || filter.min_def === undefined || stats.defending >= filter.min_def) &&
-          (filter.max_def === null || filter.max_def === undefined || stats.defending <= filter.max_def)
+          (filter.min_defending === null ||
+            filter.min_defending === undefined ||
+            stats.defending >= filter.min_defending) &&
+          (filter.max_defending === null ||
+            filter.max_defending === undefined ||
+            stats.defending <= filter.max_defending)
         const passingMatches =
-          (filter.min_pas === null || filter.min_pas === undefined || stats.passing >= filter.min_pas) &&
-          (filter.max_pas === null || filter.max_pas === undefined || stats.passing <= filter.max_pas)
+          (filter.min_passing === null || filter.min_passing === undefined || stats.passing >= filter.min_passing) &&
+          (filter.max_passing === null || filter.max_passing === undefined || stats.passing <= filter.max_passing)
         const physicMatches =
-          (filter.min_phy === null || filter.min_phy === undefined || stats.physic >= filter.min_phy) &&
-          (filter.max_phy === null || filter.max_phy === undefined || stats.physic <= filter.max_phy)
+          (filter.min_physic === null || filter.min_physic === undefined || stats.physic >= filter.min_physic) &&
+          (filter.max_physic === null || filter.max_physic === undefined || stats.physic <= filter.max_physic)
         const clubPositionMatches = filter.position
           ? stats.PlayerClub.some((club) => club.club_position === filter.position)
           : true
