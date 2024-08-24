@@ -3,3 +3,4 @@
 enum_gen.py
 *.pyc
 test.py
+*.db

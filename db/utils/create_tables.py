@@ -3,8 +3,7 @@ import sqlite3
 
 
 def create_db():
-    con = sqlite3.connect("db\\db.db")
-
+    con = sqlite3.connect("server\\prisma\\db.db")
 
     cur = con.cursor()
 

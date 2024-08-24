@@ -1,9 +1,6 @@
-from columns import *
-from positions import positions_dict
-#from traits import traits_dict
-#from leagues import leagues_dict
-#from tags import tags_dict
-#from clubs import clubs_dict
+from utils.columns import *
+from utils.positions import positions_dict
+
 def create_player(col):
     obj = {}
     obj['sofifa_id'] = col[SOFIFA_ID] if col[SOFIFA_ID] != "" else None

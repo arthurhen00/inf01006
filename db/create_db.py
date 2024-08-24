@@ -1,11 +1,13 @@
 import csv
 import re
+import sys
 
-from create_objects import *
-from positions import positions_array
+sys.stdout.reconfigure(encoding='utf-8')
 
-from insert_data import *
-from create_tables import create_db
+from utils.create_objects import *
+from utils.positions import positions_array
+
+from utils.create_tables import create_db
 data_folder = 'db\\data'
 filenames = ['players_15.csv','players_16.csv','players_17.csv','players_18.csv']
 
@@ -74,12 +76,6 @@ for filename in filenames:
             if player_nation != {} and player_nation['sofifa_id'] not in player_nations:
                 player_nations[player_nation['sofifa_id']] = player_nation
                     
-import sys
-
-# Ensure the default encoding for stdout is set to UTF-8
-sys.stdout.reconfigure(encoding='utf-8')
-
-
 
 for filename in filenames:
     match = re.search(r'\d+', filename)
@@ -126,7 +122,7 @@ players = [value for _ , value in players.items()]
 player_nations = [value for _ , value in player_nations.items()]
 
 create_db()
-
+from utils.insert_data import *
 insert_players(players)
 insert_tags(tags) 
 insert_traits(traits) 

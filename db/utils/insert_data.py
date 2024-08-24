@@ -1,5 +1,5 @@
 import sqlite3
-con = sqlite3.connect("db\\db.db")
+con = sqlite3.connect("server\\prisma\\db.db")
 cur = con.cursor()
 
 def insert_players(players):
