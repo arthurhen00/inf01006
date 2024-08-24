@@ -33,61 +33,61 @@ export class GetFilteredPlayersRequest {
   @IsNumber()
   @Min(0)
   @Max(100)
-  min_sho: number
+  min_shooting: number
 
   @IsOptional()
   @IsNumber()
   @Min(0)
   @Max(100)
-  max_sho: number
+  max_shooting: number
 
   @IsOptional()
   @IsNumber()
   @Min(0)
   @Max(100)
-  min_pas: number
+  min_passing: number
 
   @IsOptional()
   @IsNumber()
   @Min(0)
   @Max(100)
-  max_pas: number
+  max_passing: number
 
   @IsOptional()
   @IsNumber()
   @Min(0)
   @Max(100)
-  min_dri: number
+  min_dribbling: number
 
   @IsOptional()
   @IsNumber()
   @Min(0)
   @Max(100)
-  max_dri: number
+  max_dribbling: number
 
   @IsOptional()
   @IsNumber()
   @Min(0)
   @Max(100)
-  min_def: number
+  min_defending: number
 
   @IsOptional()
   @IsNumber()
   @Min(0)
   @Max(100)
-  max_def: number
+  max_defending: number
 
   @IsOptional()
   @IsNumber()
   @Min(0)
   @Max(100)
-  min_phy: number
+  min_physic: number
 
   @IsOptional()
   @IsNumber()
   @Min(0)
   @Max(100)
-  max_phy: number
+  max_physic: number
 
   @IsOptional()
   @IsString()
