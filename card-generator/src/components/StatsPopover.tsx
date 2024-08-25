@@ -17,7 +17,7 @@ export function StatsPopover() {
         <div className="grid gap-4">
           <div className="space-y-2">
             <h4 className="font-medium leading-none">Stats</h4>
-            <p className="text-sm">Set the dimensions for the layer.</p>
+            <p className="text-sm">Set the advanced filters.</p>
           </div>
 
           <div className="grid gap-2">

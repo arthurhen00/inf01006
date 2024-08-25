@@ -25,7 +25,7 @@ export function CardFilter({ onFilter }: props) {
 
   return (
     <FormProvider {...methods}>
-      <form onSubmit={methods.handleSubmit(handleFilterCards)} className="flex w-80 flex-col gap-y-2 px-4">
+      <form onSubmit={methods.handleSubmit(handleFilterCards)} className="flex flex-col gap-y-2 px-4">
         <h1 className="text-center text-2xl font-bold">Search for a specific player card</h1>
         <div className="flex flex-col gap-y-1">
           <Input
@@ -53,7 +53,7 @@ export function CardFilter({ onFilter }: props) {
         </div>
         <Separator className="bg-fst-200" />
         <Button className="self-end border-[1px] border-snd-300 bg-fst-800 text-snd-100">
-          Procurar
+          Search
           <Search className="ml-2 h-4 w-4" />
         </Button>
       </form>
