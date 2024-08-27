@@ -9,7 +9,7 @@ from utils.positions import positions_array
 
 from utils.create_tables import create_db
 data_folder = 'db\\data'
-filenames = ['players_15.csv','players_16.csv','players_17.csv','players_18.csv']
+filenames = ['players_15.csv','players_16.csv','players_17.csv','players_18.csv','players_19.csv','players_20.csv','players_21.csv','players_22.csv']
 
 players = []
 player_nations = []

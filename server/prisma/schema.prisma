@@ -171,7 +171,7 @@ model PlayerPositions {
 model League {
   league_id    Int    @id
   league_name  String
-  league_level Int
+  league_level Int?
 
   Club Club[]
 }
