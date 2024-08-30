@@ -59,7 +59,6 @@ export interface PlayerData {
   items: number
   page: number
   pages: number
-  current_page: number
   data: Player[]
 }
 

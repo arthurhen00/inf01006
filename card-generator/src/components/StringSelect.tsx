@@ -1,7 +1,7 @@
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from './ui'
 import { Control, Controller } from 'react-hook-form'
-import { useEffect, useState } from 'react'
 import { CardsFiltersSchema } from '@/data'
+import { useQuery } from '@tanstack/react-query'
 
 interface SelectProps {
   control: Control<CardsFiltersSchema>
@@ -10,22 +10,20 @@ interface SelectProps {
 }
 
 export function StringSelect({ control, name, fetchData }: SelectProps) {
-  const [values, setValues] = useState<string[]>([])
-
-  useEffect(() => {
-    async function fetchValues() {
-      const data = await fetchData()
-      setValues(data)
-    }
-    fetchValues()
-  }, [fetchData])
+  const { data: selectResponse, isLoading } = useQuery({
+    queryKey: ['get-'+name],
+    queryFn: async () => {
+      const response = await fetchData()
+      return response
+    },
+  })
 
   return (
     <Controller
       name={name}
       control={control}
       render={({ field }) => (
-        <Select value={field.value ? String(field.value) : undefined} onValueChange={field.onChange}>
+        <Select value={field.value ? String(field.value) : undefined} onValueChange={field.onChange} disabled={isLoading}>
           <SelectTrigger className="w-36 border-none bg-fst-800">
             <SelectValue placeholder={name} />
           </SelectTrigger>
@@ -33,7 +31,7 @@ export function StringSelect({ control, name, fetchData }: SelectProps) {
             <SelectGroup>
               <SelectLabel>Year</SelectLabel>
               <SelectItem value="any">Any</SelectItem>
-              {values.map((value, index) => (
+              {selectResponse?.map((value, index) => (
                 <SelectItem value={value} key={index}>
                   {value}
                 </SelectItem>

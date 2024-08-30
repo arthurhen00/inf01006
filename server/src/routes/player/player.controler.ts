@@ -31,14 +31,16 @@ export class PlayerController {
     const getFilteredPlayersRequest = plainToClass(GetFilteredPlayersRequest, body)
     validate(getFilteredPlayersRequest).then((errors) => {
       if (errors.length > 0) {
-        console.log('validation failed. errors: ', errors)
+        // console.log('validation failed. errors: ', errors)
       } else {
-        console.log('validation succeed')
+        // console.log('validation succeed')
       }
     })
-    const totalItems = await this.getPlayersNumbersUseCase.exec()
+    // doesnt have pagination
+    const totalItems = await this.getPlayersNumbersUseCase.exec(body)
 
     const itemsPerPage = 100
+    // have pagination
     const players = await this.getFilteredPlayersUseCase.exec(body, parseInt(page), itemsPerPage)
 
     return GetPaginatedResponse.fromArray(players, parseInt(page), totalItems)
